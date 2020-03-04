@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Wowing.github.io</id>
-    <title>https://Wowing.github.io</title>
-    <updated>2020-03-04T10:46:42.189Z</updated>
+    <title>Miku酱的Blog</title>
+    <updated>2020-03-04T10:47:28.608Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Wowing.github.io"/>
     <link rel="self" href="https://Wowing.github.io/atom.xml"/>
     <subtitle>我，是一个人</subtitle>
     <logo>https://Wowing.github.io/images/avatar.png</logo>
     <icon>https://Wowing.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2020, https://Wowing.github.io</rights>
+    <rights>All rights reserved 2020, Miku酱的Blog</rights>
     <entry>
         <title type="html"><![CDATA[大事祭]]></title>
         <id>https://Wowing.github.io/post/da-shi-ji/</id>
