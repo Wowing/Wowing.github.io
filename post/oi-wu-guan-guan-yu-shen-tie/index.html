@@ -4,93 +4,55 @@
     <meta charset="utf-8" >
 
 <title>【OI无关】关于神帖 | https://Wowing.github.io</title>
-<meta name="description" content="我，是一个人">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="shortcut icon" href="https://Wowing.github.io/favicon.ico?v=1583318756416">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="shortcut icon" href="https://Wowing.github.io/favicon.ico?v=1583318787137">
 <link rel="stylesheet" href="https://Wowing.github.io/styles/main.css">
 
 
-<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-
 
 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 
+
+    <meta name="description" content="不是上网的人变xxs了，而是网络已经普及到xxs中去了
+当一个交流平台人数很少时，人们往往能够相处得融洽，或至少能维持关系和睦，但如果变得人多而杂，便会出现某些人素质低下、态度恶劣、无法求同存异甚至专门通过引战、撕逼等引发争吵来获得快感的情..." />
+    <meta name="keywords" content="" />
   </head>
   <body>
-  
-    <nav class="navbar border fixed split-nav">
-  <div class="nav-brand">
-    <h3><a href="https://Wowing.github.io">https://Wowing.github.io</a></h3>
-  </div>
-  <div class="collapsible">
-    <input id="collapsible1" type="checkbox" name="collapsible1">
-    <button>
-      <label for="collapsible1">
-        <div class="bar1"></div>
-        <div class="bar2"></div>
-        <div class="bar3"></div>
-      </label>
-    </button>
-    <div class="collapsible-body">
-      <ul class="inline">
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://Wowing.github.io">
+        <img src="https://Wowing.github.io/images/avatar.png?v=1583318787137" class="site-logo">
+        <h1 class="site-title">https://Wowing.github.io</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
         
-          <li>
-            
-              <a href="/" class="menu">
-                首页
-              </a>
-            
-          </li>
+          <a href="/" class="site-nav">
+            首页
+          </a>
         
-          <li>
-            
-              <a href="https://Wowing.github.io/archives" class="menu">
-                关于
-              </a>
-            
-          </li>
+      
         
-      </ul>
+          <a href="https://Wowing.github.io/archives" class="site-nav">
+            关于
+          </a>
+        
+      
     </div>
   </div>
-</nav>
-
-    <div id="top" class="row site">
-      <div class="sm-12 md-8 col">
-        <div class="paper">
-          <article class="article">
-            <h1>【OI无关】关于神帖</h1>
-            <p class="article-meta">
-              2020-03-04
-              
-            </p>
-            
-              <img src="https://Wowing.github.io/post-images/oi-wu-guan-guan-yu-shen-tie.ico" alt="【OI无关】关于神帖">
-            
-            <div class="post-content">
-              <h5 id="不是上网的人变xxs了而是网络已经普及到xxs中去了">不是上网的人变xxs了，而是网络已经普及到xxs中去了</h5>
-<p>当一个交流平台人数很少时，人们往往能够相处得融洽，或至少能维持关系和睦，但如果变得人多而杂，便会出现某些人素质低下、态度恶劣、无法求同存异甚至专门通过引战、撕逼等引发争吵来获得快感的情况，导致时不时就会出现严重的纠纷或者战争、管理人员郁闷烦躁、平台成员愤怒离开等情况。</p>
-<p>正如某dalao所说：lg真的需要一些正气</p>
-
-            </div>
-          </article>
-        </div>
-        <div class="paper" data-aos="fade-in">
-          
-        </div>
-        
-      </div>
-
-      <div class="sm-12 md-4 col sidebar">
-  <div class="paper info-container">
-    <img src="https://Wowing.github.io/images/avatar.png?v=1583318756416" class="no-responsive avatar">
-    <div class="text-muted">我，是一个人</div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
     <div class="social-container">
       
         
@@ -104,64 +66,57 @@
         
       
     </div>
-  </div>
-  <div class="paper">
-    <div class="sidebar-title">
-      最新文章
+    <div class="site-description">
+      我，是一个人
     </div>
-    <div class="row">
-      <ul>
-        
-          
-            <li>
-              <a href="https://Wowing.github.io/post/da-shi-ji/">大事祭</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://Wowing.github.io/post/ge-ren-jian-jie/">个人简介</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://Wowing.github.io/post/oi-wu-guan-guan-yu-shen-tie/">【OI无关】关于神帖</a>
-            </li>
-          
-        
-      </ul>
+    <div class="site-footer">
+      Powered by <a href="Wowing.github.io" target="_blank">Gridea</a> | <a class="rss" href="https://Wowing.github.io/atom.xml" target="_blank">RSS</a>
     </div>
-  </div>
-  <div class="paper">
-    <div class="sidebar-title">
-      标签列表
-    </div>
-    <div class="row">
-      
-        <a href="https://Wowing.github.io/tag/xDWUylTaE/" class="badge secondary">
-          个人
-        </a>
-      
-    </div>
-  </div>
-  <div class="paper">
-    Powered by <a href="Wowing.github.io" target="_blank">Gridea</a> | <a class="rss" href="https://Wowing.github.io/atom.xml" target="_blank">RSS</a>
   </div>
 </div>
 
 
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">【OI无关】关于神帖</h2>
+            <div class="post-date">2020-03-04</div>
+            
+              <div class="feature-container" style="background-image: url('https://Wowing.github.io/post-images/oi-wu-guan-guan-yu-shen-tie.ico')">
+              </div>
+            
+            <div class="post-content" v-pre>
+              <h5 id="不是上网的人变xxs了而是网络已经普及到xxs中去了">不是上网的人变xxs了，而是网络已经普及到xxs中去了</h5>
+<p>当一个交流平台人数很少时，人们往往能够相处得融洽，或至少能维持关系和睦，但如果变得人多而杂，便会出现某些人素质低下、态度恶劣、无法求同存异甚至专门通过引战、撕逼等引发争吵来获得快感的情况，导致时不时就会出现严重的纠纷或者战争、管理人员郁闷烦躁、平台成员愤怒离开等情况。</p>
+<p>正如某dalao所说：lg真的需要一些正气</p>
+
+            </div>
+            
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
     </div>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-
 <script type="application/javascript">
 
 AOS.init();
 
-hljs.initHighlightingOnLoad()
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
 
 </script>
+
+
 
 
 
