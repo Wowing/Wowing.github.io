@@ -1,0 +1,192 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>题解 CF441A 【Valera and Antique Items】 | Miku酱的Blog</title>
+<link rel="shortcut icon" href="https://Wowing.github.io/favicon.ico?v=1583382971814">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://Wowing.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="题解 CF441A 【Valera and Antique Items】 | Miku酱的Blog - Atom Feed" href="https://Wowing.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="RERERE了好久，结果发现是system(&quot;pause&quot;);的错误。
+首先，看到这道题目，可能很多萌新和我一样是一脸茫然的。“这不是背包/动规吗？怎么成入门题了呢？”
+先别急，仔细看题目后，我们可以把题目概括成这样：
+..." />
+    <meta name="keywords" content="题解" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://Wowing.github.io">
+  <img class="avatar" src="https://Wowing.github.io/images/avatar.png?v=1583382971814" alt="">
+  </a>
+  <h1 class="site-title">
+    Miku酱的Blog
+  </h1>
+  <p class="site-description">
+    我，是一个人
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="https://Wowing.github.io/archives" class="menu">
+          目录
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              题解 CF441A 【Valera and Antique Items】
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-03-05
+              </span>
+              <span>
+                2 min read
+              </span>
+              
+                <a href="https://Wowing.github.io/tag/mimoasUfJ/" class="post-tag">
+                  # 题解
+                </a>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://Wowing.github.io/post-images/ti-jie-cf441a-valera-and-antique-items.jpg" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi><mi>E</mi></mrow><annotation encoding="application/x-tex">RE</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span></span></span></span>了好久，结果发现是<code>system(&quot;pause&quot;);</code>的错误。</p>
+<p>首先，看到这道题目，可能很多萌新和我一样是一脸茫然的。“这不是背包/动规吗？怎么成入门题了呢？”</p>
+<p>先别急，仔细看题目后，我们可以把题目概括成这样：</p>
+<p>有<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span>组数，第<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>个组数有<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi><mi>i</mi></mrow><annotation encoding="application/x-tex">ki</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord mathdefault">i</span></span></span></span>个数字。只要你的数字高于第<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>个数，这一组数字就属于你了。问你能得到几组数字？分别是第几组？</p>
+<p>这样就简单很多了吧......</p>
+<p>只要这个数组的数有一个小于你的数，就可以把<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mi>i</mi></mrow><annotation encoding="application/x-tex">ai</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault">i</span></span></span></span>标记为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>。最后输出<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mi>n</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">ans</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span></span></span></span>即可。</p>
+<p>上代码：</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int n,an,x,nx,ans;
+int a[51];
+int main()
+{
+    cin&gt;&gt;n&gt;&gt;an;
+    for(int i=1;i&lt;=n;i++)
+    {
+        cin&gt;&gt;nx;//输入个数
+        for(int j=1;j&lt;=nx;j++)
+        {
+            cin&gt;&gt;x;
+            if(x&lt;an) a[i]=1;//桶排序
+        }
+        if(a[i]==1) ans++;//如果有的话，ans++
+    }
+    cout&lt;&lt;ans&lt;&lt;endl;
+    for(int i=1;i&lt;=n;i++) if(a[i]==1) cout&lt;&lt;i&lt;&lt;&quot; &quot;;
+    //system(&quot;pause&quot;);
+    return 0;
+}
+</code></pre>
+<p>值得一提的是：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mi>n</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">ans</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span></span></span></span>是<strong>你得到的数组数量</strong>，而不是你能得到的数字的数量。</p>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://Wowing.github.io/post/ti-jie-at3881-arc090a-candies/">
+              <h3 class="post-title">
+                题解 AT3881 【[ARC090A] Candies】
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="Wowing.github.io" target="_blank">Gridea</a>
+  <a class="rss" href="https://Wowing.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
