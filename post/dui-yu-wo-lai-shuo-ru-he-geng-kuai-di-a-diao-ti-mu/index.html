@@ -1,0 +1,219 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>对于我来说，如何更快地A掉题目 | Miku酱的Blog</title>
+<link rel="shortcut icon" href="https://Wowing.github.io/favicon.ico?v=1583374229358">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://Wowing.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="对于我来说，如何更快地A掉题目 | Miku酱的Blog - Atom Feed" href="https://Wowing.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="对于我来说，如何更快地骗分A掉题目
+这是关于一个蒟蒻的经验，请各位多多指教！
+1.说明
+大部分题目都有说明。这里以小X分砖块为例。在提示（说明）中可以看见这样的说明：
+
+对于 30%的数据，N=1。
+对于 60%的数据，所有 Ki均相等。
+..." />
+    <meta name="keywords" content="文章" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://Wowing.github.io">
+  <img class="avatar" src="https://Wowing.github.io/images/avatar.png?v=1583374229358" alt="">
+  </a>
+  <h1 class="site-title">
+    Miku酱的Blog
+  </h1>
+  <p class="site-description">
+    我，是一个人
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="https://Wowing.github.io/archives" class="menu">
+          目录
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              对于我来说，如何更快地A掉题目
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-03-05
+              </span>
+              <span>
+                2 min read
+              </span>
+              
+                <a href="https://Wowing.github.io/tag/TDAskdk5V/" class="post-tag">
+                  # 文章
+                </a>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://Wowing.github.io/post-images/dui-yu-wo-lai-shuo-ru-he-geng-kuai-di-a-diao-ti-mu.jpg" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h1 id="对于我来说如何更快地骗分a掉题目">对于我来说，如何更快地<s>骗分</s>A掉题目</h1>
+<p>这是关于一个蒟蒻的经验，请各位多多指教！</p>
+<h2 id="1说明">1.说明</h2>
+<p>大部分题目都有说明。这里以<a href="https://wzoi.cc/s/1/2464">小X分砖块</a>为例。在提示（说明）中可以看见这样的说明：</p>
+<ul>
+<li>对于 30%的数据，N=1。</li>
+<li>对于 60%的数据，所有 Ki均相等。</li>
+<li>对于 100%的数据， 1≤N≤100000， 1≤Ki≤1000000000， 砖的总块数不超过 1000000000。</li>
+</ul>
+<p>然后，我惊讶地发现：我不会写这道题。于是，说明就有用了！</p>
+<ul>
+<li>对于 30%的数据，N=1。<br>
+在N=1的情况下，说明只有一段，那么就特判输出砖块总数量就可以了。</li>
+</ul>
+<p>代码如下：</p>
+<pre><code class="language-cpp">	if(n==1)
+    {
+    	int ttt;
+        cin&gt;&gt;ans&gt;&gt;ttt;
+        printf(&quot;%d&quot;,ans);
+        return 0;
+    }
+    
+</code></pre>
+<p>然后，就这样，轻松得了30分。<br>
+<a href="https://wzoi.cc/solutions/964078">地址</a></p>
+<p>虽然没有满分，但是30分总比0分好吧......</p>
+<p>总之，数据是个好东西！</p>
+<h2 id="2你谷评论区">2.你谷评论区</h2>
+<p>在你谷评论区，总能找到一些神奇的东西。如<a href="https://www.luogu.org/problemnew/show/P1547">P1547 Out of Hay</a></p>
+<p>在一开始写这题的时候，只是直接用最小生成树的。然而，在习惯性地点开评论区后.......</p>
+<figure data-type="image" tabindex="1"><img src="https://cdn.luogu.com.cn/upload/pic/56159.png" alt="RT" loading="lazy"></figure>
+<p>然后就把P1111加上了这位dalao的判断，然后完美AC！؏؏☝ᖗ乛◡乛ᖘ☝؏؏</p>
+<p><a href="https://www.luogu.org/recordnew/show/17960629">地址</a></p>
+<p>总之，评论区会有惊喜！（当然，有直接代码也不能抄哦！）</p>
+<h2 id="3打表">3.打表</h2>
+<p>这个就不用说了吧.......</p>
+<p><a href="https://www.luogu.org/problemnew/show/CF409F">CF409F 000001</a>，自己体会。</p>
+<h2 id="小结">小结</h2>
+<p>打表加暴力，</p>
+<p>骗分过样例。</p>
+<p>暴力出奇迹，</p>
+<p>打表出省一。</p>
+<p>第一次写文章写得不好请多关照！</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#%E5%AF%B9%E4%BA%8E%E6%88%91%E6%9D%A5%E8%AF%B4%E5%A6%82%E4%BD%95%E6%9B%B4%E5%BF%AB%E5%9C%B0%E9%AA%97%E5%88%86a%E6%8E%89%E9%A2%98%E7%9B%AE">对于我来说，如何更快地<s>骗分</s>A掉题目</a>
+<ul>
+<li><a href="#1%E8%AF%B4%E6%98%8E">1.说明</a></li>
+<li><a href="#2%E4%BD%A0%E8%B0%B7%E8%AF%84%E8%AE%BA%E5%8C%BA">2.你谷评论区</a></li>
+<li><a href="#3%E6%89%93%E8%A1%A8">3.打表</a></li>
+<li><a href="#%E5%B0%8F%E7%BB%93">小结</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://Wowing.github.io/post/e-wo-men-ke-ai-de/">
+              <h3 class="post-title">
+                哦，我们可爱的C++
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="Wowing.github.io" target="_blank">Gridea</a>
+  <a class="rss" href="https://Wowing.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

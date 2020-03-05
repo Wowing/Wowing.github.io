@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Wowing.github.io</id>
     <title>Miku酱的Blog</title>
-    <updated>2020-03-05T02:07:29.608Z</updated>
+    <updated>2020-03-05T02:10:34.371Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Wowing.github.io"/>
     <link rel="self" href="https://Wowing.github.io/atom.xml"/>
@@ -10,6 +10,142 @@
     <logo>https://Wowing.github.io/images/avatar.png</logo>
     <icon>https://Wowing.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Miku酱的Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[题解 AT3881 【[ARC090A] Candies】]]></title>
+        <id>https://Wowing.github.io/post/ti-jie-at3881-arc090a-candies/</id>
+        <link href="https://Wowing.github.io/post/ti-jie-at3881-arc090a-candies/">
+        </link>
+        <updated>2020-03-05T02:09:39.000Z</updated>
+        <content type="html"><![CDATA[<p>看到dalao们都用DP写这道题，萌新不得不弱弱地发声：“这难道不是一道DFS题吗？”</p>
+<p>实际上，我认为这道题目就是赤裸裸的深度优先搜索！唯一要注意的是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span>为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span>的时候的特判。</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>c</mi><mi>o</mi><mi>d</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">code</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">o</span><span class="mord mathdefault">d</span><span class="mord mathdefault">e</span></span></span></span>:</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int n,m,a[41][101];
+//bool f[41][41];
+int maxx;
+void dfs(int x,int y,int sum)
+{
+    if(x&lt;1||x&gt;2||y&lt;1||y&gt;n) return;
+    if(x==2&amp;&amp;y==n) maxx=max(maxx,sum);//maxx取最大值
+    if(x&lt;2) dfs(x+1,y,sum+a[x+1][y]);//搜索
+    dfs(x,y+1,sum+a[x][y+1]);
+}
+int main()
+{
+	//ios::sync_with_stdio(false);
+	int i,j;
+	cin&gt;&gt;n;
+	for(i=1;i&lt;=2;i++)
+	{
+		for(j=1;j&lt;=n;j++)
+		{
+			cin&gt;&gt;a[i][j];
+		}
+	}
+	dfs(1,1,a[1][1]);
+	cout&lt;&lt;maxx;//输出
+    //system(&quot;pause&quot;);
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[题解 AT3919 【[ABC088B] Card Game for Two】]]></title>
+        <id>https://Wowing.github.io/post/ti-jie-at3919-abc088b-card-game-for-two/</id>
+        <link href="https://Wowing.github.io/post/ti-jie-at3919-abc088b-card-game-for-two/">
+        </link>
+        <updated>2020-03-05T02:08:50.000Z</updated>
+        <content type="html"><![CDATA[<p>萌新的奇怪思路：</p>
+<ul>
+<li>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> mod 2=0:每一次都用奇数项减去偶数项，再加入<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mi>n</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">ans</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span></span></span></span>。</p>
+</li>
+<li>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> mod 2=0:由于最后一张卡牌肯定是先手的，所以直接把最后一个数加入<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mi>n</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">ans</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span></span></span></span>，然后<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>。</p>
+</li>
+</ul>
+<p>代码：</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int a[101],n,ans;
+int cmp(int a,int b)
+{
+    return a&gt;b;
+}
+int main()
+{
+    cin&gt;&gt;n;
+    for(int i=1;i&lt;=n;i++) cin&gt;&gt;a[i];
+    sort(a+1,a+1+n,cmp);
+    if(n%2==1)//直接判断
+    {
+        n-=1;
+        ans+=a[n+1];
+    }
+    for(int i=1;i&lt;=n;i+=2)//两个一起
+    {
+        ans+=a[i]-a[i+1];
+    }
+    cout&lt;&lt;ans;
+    //system(&quot;pause&quot;);
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[对于我来说，如何更快地A掉题目]]></title>
+        <id>https://Wowing.github.io/post/dui-yu-wo-lai-shuo-ru-he-geng-kuai-di-a-diao-ti-mu/</id>
+        <link href="https://Wowing.github.io/post/dui-yu-wo-lai-shuo-ru-he-geng-kuai-di-a-diao-ti-mu/">
+        </link>
+        <updated>2020-03-05T02:08:04.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="对于我来说如何更快地骗分a掉题目">对于我来说，如何更快地<s>骗分</s>A掉题目</h1>
+<p>这是关于一个蒟蒻的经验，请各位多多指教！</p>
+<h2 id="1说明">1.说明</h2>
+<p>大部分题目都有说明。这里以<a href="https://wzoi.cc/s/1/2464">小X分砖块</a>为例。在提示（说明）中可以看见这样的说明：</p>
+<ul>
+<li>对于 30%的数据，N=1。</li>
+<li>对于 60%的数据，所有 Ki均相等。</li>
+<li>对于 100%的数据， 1≤N≤100000， 1≤Ki≤1000000000， 砖的总块数不超过 1000000000。</li>
+</ul>
+<p>然后，我惊讶地发现：我不会写这道题。于是，说明就有用了！</p>
+<ul>
+<li>对于 30%的数据，N=1。<br>
+在N=1的情况下，说明只有一段，那么就特判输出砖块总数量就可以了。</li>
+</ul>
+<p>代码如下：</p>
+<pre><code class="language-cpp">	if(n==1)
+    {
+    	int ttt;
+        cin&gt;&gt;ans&gt;&gt;ttt;
+        printf(&quot;%d&quot;,ans);
+        return 0;
+    }
+    
+</code></pre>
+<p>然后，就这样，轻松得了30分。<br>
+<a href="https://wzoi.cc/solutions/964078">地址</a></p>
+<p>虽然没有满分，但是30分总比0分好吧......</p>
+<p>总之，数据是个好东西！</p>
+<h2 id="2你谷评论区">2.你谷评论区</h2>
+<p>在你谷评论区，总能找到一些神奇的东西。如<a href="https://www.luogu.org/problemnew/show/P1547">P1547 Out of Hay</a></p>
+<p>在一开始写这题的时候，只是直接用最小生成树的。然而，在习惯性地点开评论区后.......</p>
+<figure data-type="image" tabindex="1"><img src="https://cdn.luogu.com.cn/upload/pic/56159.png" alt="RT" loading="lazy"></figure>
+<p>然后就把P1111加上了这位dalao的判断，然后完美AC！؏؏☝ᖗ乛◡乛ᖘ☝؏؏</p>
+<p><a href="https://www.luogu.org/recordnew/show/17960629">地址</a></p>
+<p>总之，评论区会有惊喜！（当然，有直接代码也不能抄哦！）</p>
+<h2 id="3打表">3.打表</h2>
+<p>这个就不用说了吧.......</p>
+<p><a href="https://www.luogu.org/problemnew/show/CF409F">CF409F 000001</a>，自己体会。</p>
+<h2 id="小结">小结</h2>
+<p>打表加暴力，</p>
+<p>骗分过样例。</p>
+<p>暴力出奇迹，</p>
+<p>打表出省一。</p>
+<p>第一次写文章写得不好请多关照！</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[哦，我们可爱的C++]]></title>
         <id>https://Wowing.github.io/post/e-wo-men-ke-ai-de/</id>

@@ -2,18 +2,20 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>哦，我们可爱的C++ | Miku酱的Blog</title>
+<title>题解 AT3881 【[ARC090A] Candies】 | Miku酱的Blog</title>
 <link rel="shortcut icon" href="https://Wowing.github.io/favicon.ico?v=1583374229358">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://Wowing.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="哦，我们可爱的C++ | Miku酱的Blog - Atom Feed" href="https://Wowing.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="题解 AT3881 【[ARC090A] Candies】 | Miku酱的Blog - Atom Feed" href="https://Wowing.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="苗条的双腿和协调的五官，被许多人称做「IT界首屈一指的美女」的她，也因为拥有插花、茶道、钢琴、小提琴、柔道、剑道、合气道等等才能而出名。
-她的粉丝大多很狂热，还存在着「暗之军团」这样的粉丝俱乐部。「暗之军团」是规模仅次于共济会（Freema..." />
-    <meta name="keywords" content="" />
+    <meta name="description" content="看到dalao们都用DP写这道题，萌新不得不弱弱地发声：“这难道不是一道DFS题吗？”
+实际上，我认为这道题目就是赤裸裸的深度优先搜索！唯一要注意的是nnn为000的时候的特判。
+codecodecode:
+#include&lt;bits..." />
+    <meta name="keywords" content="题解" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
@@ -63,7 +65,7 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              哦，我们可爱的C++
+              题解 AT3881 【[ARC090A] Candies】
             </h2>
             <div class="post-info">
               <span>
@@ -73,19 +75,49 @@
                 2 min read
               </span>
               
+                <a href="https://Wowing.github.io/tag/mimoasUfJ/" class="post-tag">
+                  # 题解
+                </a>
+              
             </div>
             
-              <img class="post-feature-image" src="https://Wowing.github.io/post-images/e-wo-men-ke-ai-de.png" alt="">
+              <img class="post-feature-image" src="https://Wowing.github.io/post-images/ti-jie-at3881-arc090a-candies.jpg" alt="">
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>苗条的双腿和协调的五官，被许多人称做「IT界首屈一指的美女」的她，也因为拥有插花、茶道、钢琴、小提琴、柔道、剑道、合气道等等才能而出名。</p>
-<p>她的粉丝大多很狂热，还存在着「暗之军团」这样的粉丝俱乐部。「暗之军团」是规模仅次于共济会（Freemason）的巨型团体，一般人无法入会。据说如果能回答出对她非常狂热的问题，就会有查觉到的军团成员来询问「你愿意加入暗之军团吗？」</p>
-<p>与她同父异母的姊妹Objective-C一心专注于弹钢琴，他的专注被IT界的天才斯蒂芬‧贾伯斯（也被一部分人称为紫色蔷薇）相中，而一跃成为明星。（Objective-C是Apple OS X与iOS的主要开发程序语言。维基百科）</p>
-<p>而C++则是由于其美貌和才能被人关注，长年稳坐业界明星的宝座。姊妹二人真可谓是对比鲜明。</p>
-<figure data-type="image" tabindex="1"><img src="https://Wowing.github.io/post-images/1583373639532.png" alt="" loading="lazy"></figure>
-<p>她根据心情不同，频繁地变换发型和服装这一点也很出名：昨天还是和服配黑发、今天却以红发歌德系登场之类的。因为她的变身而使轻度粉丝惊奇地说「啊？这是今天的C++小姐吗？」的事情也常常发生。远离业界时私下经常穿HYSTERIC GLAMOUR的服装。</p>
-<p>关于她的出身年月日，其事务所并不公开。虽然也有出身于1983年一说，但是本文采用的是在一部份粉丝中流传甚广的1985年10月14日的说法。访间也流传有「她自己或许也不记得自己的生日…」这样诧有其事的传言。与其说「C++小姐的话，记不得自己的生日也不是什么不可思议的事情」，倒不如把这看作是她天真烂漫的表现。</p>
+                <p>看到dalao们都用DP写这道题，萌新不得不弱弱地发声：“这难道不是一道DFS题吗？”</p>
+<p>实际上，我认为这道题目就是赤裸裸的深度优先搜索！唯一要注意的是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span>为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span>的时候的特判。</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>c</mi><mi>o</mi><mi>d</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">code</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">o</span><span class="mord mathdefault">d</span><span class="mord mathdefault">e</span></span></span></span>:</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int n,m,a[41][101];
+//bool f[41][41];
+int maxx;
+void dfs(int x,int y,int sum)
+{
+    if(x&lt;1||x&gt;2||y&lt;1||y&gt;n) return;
+    if(x==2&amp;&amp;y==n) maxx=max(maxx,sum);//maxx取最大值
+    if(x&lt;2) dfs(x+1,y,sum+a[x+1][y]);//搜索
+    dfs(x,y+1,sum+a[x][y+1]);
+}
+int main()
+{
+	//ios::sync_with_stdio(false);
+	int i,j;
+	cin&gt;&gt;n;
+	for(i=1;i&lt;=2;i++)
+	{
+		for(j=1;j&lt;=n;j++)
+		{
+			cin&gt;&gt;a[i][j];
+		}
+	}
+	dfs(1,1,a[1][1]);
+	cout&lt;&lt;maxx;//输出
+    //system(&quot;pause&quot;);
+	return 0;
+}
+</code></pre>
 
               </div>
               <div class="toc-container">
@@ -98,9 +130,9 @@
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://Wowing.github.io/post/da-shi-ji/">
+            <a href="https://Wowing.github.io/post/ti-jie-at3919-abc088b-card-game-for-two/">
               <h3 class="post-title">
-                大事祭
+                题解 AT3919 【[ABC088B] Card Game for Two】
               </h3>
             </a>
           </div>
