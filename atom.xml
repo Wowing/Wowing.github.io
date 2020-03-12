@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Wowing.github.io</id>
     <title>Miku酱的Blog</title>
-    <updated>2020-03-05T04:39:25.380Z</updated>
+    <updated>2020-03-12T09:18:27.847Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Wowing.github.io"/>
     <link rel="self" href="https://Wowing.github.io/atom.xml"/>
@@ -10,6 +10,21 @@
     <logo>https://Wowing.github.io/images/avatar.png</logo>
     <icon>https://Wowing.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Miku酱的Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[My Mind touhou]]></title>
+        <id>https://Wowing.github.io/post/my-mind-touhou/</id>
+        <link href="https://Wowing.github.io/post/my-mind-touhou/">
+        </link>
+        <updated>2020-03-12T09:17:30.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="东方歌曲qwq">东方歌曲qwq</h1>
+<h3 id="ノ字曲">ノ字曲</h3>
+<p>大小姐《滲色血界 狂月ノ獄》</p>
+<p>二小姐《緋色月下 狂咲ノ絶》</p>
+<p>uuz《死奏怜音 玲珑ノ终》</p>
+<p>早苗《风导星歌、黎明ノ景》</p>
+<p>幽香《幽音絶花、缭乱ノ彩》</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[题解 CF441A 【Valera and Antique Items】]]></title>
         <id>https://Wowing.github.io/post/ti-jie-cf441a-valera-and-antique-items/</id>
