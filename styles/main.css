@@ -993,11 +993,15 @@ td {
       }
     
       .main {
-        background: #ffa8a8;
+        background: #66ccff;
       }
     
       body {
-        background: #66ccff;
+        background: #1971c2;
+      }
+    
+      a {
+        color: #f783ac;
       }
     
       #Snow{
