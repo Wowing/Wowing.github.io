@@ -1,0 +1,263 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>题解 AT3875 【[ARC089A] Traveling】 | Miku酱的Blog</title>
+<link rel="shortcut icon" href="https://Wowing.github.io/favicon.ico?v=1586085871618">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://Wowing.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="题解 AT3875 【[ARC089A] Traveling】 | Miku酱的Blog - Atom Feed" href="https://Wowing.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="有生之年居然能够入门题WA，果然我太菜了qwq
+好，进入正题：
+一开始我看到这样的题目，第一反应就是万能的dfs！
+思路：搜索路线，由于求最短时间所以可以直接剪枝向左和向上。而求出最短时间比较即可。
+代码分数：0\color{red}{0}..." />
+    <meta name="keywords" content="题解" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://Wowing.github.io">
+  <img class="avatar" src="https://Wowing.github.io/images/avatar.png?v=1586085871618" alt="">
+  </a>
+  <h1 class="site-title">
+    Miku酱的Blog
+  </h1>
+  <p class="site-description">
+    为这个美好的世界献上祝福~
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="https://Wowing.github.io/archives" class="menu">
+          目录
+        </a>
+      
+    
+      
+        <a href="https://www.luogu.com.cn/user/93263" class="menu">
+          洛谷
+        </a>
+      
+    
+      
+        <a href="https://www.cnblogs.com/O52LuoTianYi/" class="menu">
+          博客园
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              题解 AT3875 【[ARC089A] Traveling】
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-04-05
+              </span>
+              <span>
+                4 min read
+              </span>
+              
+                <a href="https://Wowing.github.io/tag/mimoasUfJ/" class="post-tag">
+                  # 题解
+                </a>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://Wowing.github.io/post-images/ti-jie-at3875-arc089a-traveling.jpg" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>有生之年居然能够入门题WA，果然我太菜了qwq</p>
+<p>好，进入正题：</p>
+<p>一开始我看到这样的题目，第一反应就是万能的dfs！</p>
+<p>思路：搜索路线，由于求最短时间所以可以直接剪枝向左和向上。而求出最短时间比较即可。</p>
+<p>代码分数：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="red"><mn>0</mn></mstyle></mrow><annotation encoding="application/x-tex">\color{red}{0}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord" style="color:red;"><span class="mord" style="color:red;">0</span></span></span></span></span></p>
+<p>代码：</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int n,m,a[41][101],t,fl;
+int flag=0;
+//bool f[41][41];
+int minn=1e9;
+void dfs(int x,int y,int sum)//dfs
+{
+    if(x&lt;1||x&gt;n||y&lt;1||y&gt;m) return;
+    if(x==n&amp;&amp;y==m) minn=min(minn,sum);
+    dfs(x+1,y,sum+1);
+    dfs(x,y+1,sum+1);
+}
+int main()
+{
+	//ios::sync_with_stdio(false);
+	int i,j;
+	cin&gt;&gt;t;
+    while(t--)
+    {
+        minn=1e9;
+        cin&gt;&gt;fl&gt;&gt;n&gt;&gt;m;
+        dfs(1,1,0);
+        if(minn&gt;fl||minn==0) flag=1;
+        //cout&lt;&lt;minn&lt;&lt;&quot; &quot;&lt;&lt;flag&lt;&lt;endl;
+        //else cout&lt;&lt;&quot;No&quot;;
+        //cout&lt;&lt;endl;
+    }
+    if(flag) cout&lt;&lt;&quot;No&quot;;
+    else cout&lt;&lt;&quot;Yes&quot;;
+	//dfs(1,1,a[1][1]);
+	//cout&lt;&lt;maxx;
+    //system(&quot;pause&quot;);
+	return 0;
+}
+</code></pre>
+<p>反思原因：求的是时间<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span>时能否<strong>到达</strong>，而不是在时间<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span>之前能否到达。</p>
+<p>所以让我们再回过头来看看这道题，可以明显地发现其实所需时间就是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span>+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span></span>嘛！等等，还没完：时间大小判断了，那怎么知道<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span>的时候到底能不能到达目的地呢？</p>
+<p>经过模拟，可以清楚地发现：如果你要在<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span>时间到达的话，最短时间到目的地后，可以<strong>不停地往回走一格再走回来，往回走一格再走回来......</strong></p>
+<p>所以，可以发现，只要剩余的时间mod<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span>余数为0的时候，结果就一定能够到达！</p>
+<p>代码：</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int n,m,t,fl;
+int flag=0;
+//bool f[41][41];
+int minn=1e9;
+void dfs(int x,int y,int sum)
+{
+    if(sum&gt;minn) return;
+    if(x&lt;1||x&gt;n||y&lt;1||y&gt;m) return;
+    if(x==n&amp;&amp;y==m) minn=min(minn,sum);
+    dfs(x+1,y,sum+1);
+    dfs(x,y+1,sum+1);
+}
+int main()
+{
+	//ios::sync_with_stdio(false);
+	int i,j;
+	cin&gt;&gt;t;
+    while(t--)
+    {
+        cin&gt;&gt;fl&gt;&gt;n&gt;&gt;m;
+        if(n+m&gt;fl) //时间太短，原地升天
+        {
+            flag=1;
+            break;
+        }
+        if((fl-n-m)%2==1) //走了不回，原地升天
+        {
+            flag=1;
+            break;//只要不行，直接走也
+        }
+    }
+    if(flag) cout&lt;&lt;&quot;No&quot;;
+    else cout&lt;&lt;&quot;Yes&quot;;
+	//dfs(1,1,a[1][1]);
+	//cout&lt;&lt;maxx;
+    //system(&quot;pause&quot;);
+	retun 0; //防止抄袭，抵抗之间
+}
+</code></pre>
+<p>完结撒花~</p>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://Wowing.github.io/post/my-mind-touhou/">
+              <h3 class="post-title">
+                My Mind touhou
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="Wowing.github.io" target="_blank">Gridea</a>
+  <a class="rss" href="https://Wowing.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

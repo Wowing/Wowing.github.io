@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Wowing.github.io</id>
     <title>Miku酱的Blog</title>
-    <updated>2020-04-05T11:21:53.433Z</updated>
+    <updated>2020-04-05T11:24:36.297Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Wowing.github.io"/>
     <link rel="self" href="https://Wowing.github.io/atom.xml"/>
@@ -10,6 +10,113 @@
     <logo>https://Wowing.github.io/images/avatar.png</logo>
     <icon>https://Wowing.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Miku酱的Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[我tm就是一个智障！！！]]></title>
+        <id>https://Wowing.github.io/post/wo-tm-jiu-shi-yi-ge-zhi-zhang/</id>
+        <link href="https://Wowing.github.io/post/wo-tm-jiu-shi-yi-ge-zhi-zhang/">
+        </link>
+        <updated>2020-04-05T11:23:44.000Z</updated>
+        <content type="html"><![CDATA[<p>我tm就是一个智障！！！</p>
+<p>欢迎各位来D我！！！！</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[题解 AT3875 【[ARC089A] Traveling】]]></title>
+        <id>https://Wowing.github.io/post/ti-jie-at3875-arc089a-traveling/</id>
+        <link href="https://Wowing.github.io/post/ti-jie-at3875-arc089a-traveling/">
+        </link>
+        <updated>2020-04-05T11:22:16.000Z</updated>
+        <content type="html"><![CDATA[<p>有生之年居然能够入门题WA，果然我太菜了qwq</p>
+<p>好，进入正题：</p>
+<p>一开始我看到这样的题目，第一反应就是万能的dfs！</p>
+<p>思路：搜索路线，由于求最短时间所以可以直接剪枝向左和向上。而求出最短时间比较即可。</p>
+<p>代码分数：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="red"><mn>0</mn></mstyle></mrow><annotation encoding="application/x-tex">\color{red}{0}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord" style="color:red;"><span class="mord" style="color:red;">0</span></span></span></span></span></p>
+<p>代码：</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int n,m,a[41][101],t,fl;
+int flag=0;
+//bool f[41][41];
+int minn=1e9;
+void dfs(int x,int y,int sum)//dfs
+{
+    if(x&lt;1||x&gt;n||y&lt;1||y&gt;m) return;
+    if(x==n&amp;&amp;y==m) minn=min(minn,sum);
+    dfs(x+1,y,sum+1);
+    dfs(x,y+1,sum+1);
+}
+int main()
+{
+	//ios::sync_with_stdio(false);
+	int i,j;
+	cin&gt;&gt;t;
+    while(t--)
+    {
+        minn=1e9;
+        cin&gt;&gt;fl&gt;&gt;n&gt;&gt;m;
+        dfs(1,1,0);
+        if(minn&gt;fl||minn==0) flag=1;
+        //cout&lt;&lt;minn&lt;&lt;&quot; &quot;&lt;&lt;flag&lt;&lt;endl;
+        //else cout&lt;&lt;&quot;No&quot;;
+        //cout&lt;&lt;endl;
+    }
+    if(flag) cout&lt;&lt;&quot;No&quot;;
+    else cout&lt;&lt;&quot;Yes&quot;;
+	//dfs(1,1,a[1][1]);
+	//cout&lt;&lt;maxx;
+    //system(&quot;pause&quot;);
+	return 0;
+}
+</code></pre>
+<p>反思原因：求的是时间<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span>时能否<strong>到达</strong>，而不是在时间<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span>之前能否到达。</p>
+<p>所以让我们再回过头来看看这道题，可以明显地发现其实所需时间就是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span>+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span></span>嘛！等等，还没完：时间大小判断了，那怎么知道<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span>的时候到底能不能到达目的地呢？</p>
+<p>经过模拟，可以清楚地发现：如果你要在<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span>时间到达的话，最短时间到目的地后，可以<strong>不停地往回走一格再走回来，往回走一格再走回来......</strong></p>
+<p>所以，可以发现，只要剩余的时间mod<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span>余数为0的时候，结果就一定能够到达！</p>
+<p>代码：</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int n,m,t,fl;
+int flag=0;
+//bool f[41][41];
+int minn=1e9;
+void dfs(int x,int y,int sum)
+{
+    if(sum&gt;minn) return;
+    if(x&lt;1||x&gt;n||y&lt;1||y&gt;m) return;
+    if(x==n&amp;&amp;y==m) minn=min(minn,sum);
+    dfs(x+1,y,sum+1);
+    dfs(x,y+1,sum+1);
+}
+int main()
+{
+	//ios::sync_with_stdio(false);
+	int i,j;
+	cin&gt;&gt;t;
+    while(t--)
+    {
+        cin&gt;&gt;fl&gt;&gt;n&gt;&gt;m;
+        if(n+m&gt;fl) //时间太短，原地升天
+        {
+            flag=1;
+            break;
+        }
+        if((fl-n-m)%2==1) //走了不回，原地升天
+        {
+            flag=1;
+            break;//只要不行，直接走也
+        }
+    }
+    if(flag) cout&lt;&lt;&quot;No&quot;;
+    else cout&lt;&lt;&quot;Yes&quot;;
+	//dfs(1,1,a[1][1]);
+	//cout&lt;&lt;maxx;
+    //system(&quot;pause&quot;);
+	retun 0; //防止抄袭，抵抗之间
+}
+</code></pre>
+<p>完结撒花~</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[My Mind touhou]]></title>
         <id>https://Wowing.github.io/post/my-mind-touhou/</id>
@@ -117,7 +224,7 @@ int main()
 <p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> mod 2=0:每一次都用奇数项减去偶数项，再加入<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mi>n</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">ans</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span></span></span></span>。</p>
 </li>
 <li>
-<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> mod 2=0:由于最后一张卡牌肯定是先手的，所以直接把最后一个数加入<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mi>n</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">ans</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span></span></span></span>，然后<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>。</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> mod 2=1:由于最后一张卡牌肯定是先手的，所以直接把最后一个数加入<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mi>n</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">ans</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span></span></span></span>，然后<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>。</p>
 </li>
 </ul>
 <p>代码：</p>
@@ -290,17 +397,6 @@ int main()
 <h1 id="zj沙雕王-对线她最强">ZJ沙雕王 对线她最强</h1>
 <h1 id="她是miku酱-暴躁的女生">她是Miku酱 暴躁的女生</h1>
 <h2 id="诗作者某文化课同学">诗作者：某文化课同学</h2>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[【OI无关】关于神帖]]></title>
-        <id>https://Wowing.github.io/post/oi-wu-guan-guan-yu-shen-tie/</id>
-        <link href="https://Wowing.github.io/post/oi-wu-guan-guan-yu-shen-tie/">
-        </link>
-        <updated>2020-03-04T09:53:25.000Z</updated>
-        <content type="html"><![CDATA[<h5 id="不是上网的人变xxs了而是网络已经普及到xxs中去了">不是上网的人变xxs了，而是网络已经普及到xxs中去了</h5>
-<p>当一个交流平台人数很少时，人们往往能够相处得融洽，或至少能维持关系和睦，但如果变得人多而杂，便会出现某些人素质低下、态度恶劣、无法求同存异甚至专门通过引战、撕逼等引发争吵来获得快感的情况，导致时不时就会出现严重的纠纷或者战争、管理人员郁闷烦躁、平台成员愤怒离开等情况。</p>
-<p>正如某dalao所说：lg真的需要一些正气</p>
 ]]></content>
     </entry>
 </feed>

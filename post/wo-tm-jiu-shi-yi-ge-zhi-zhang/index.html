@@ -2,20 +2,19 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>题解 AT3881 【[ARC090A] Candies】 | Miku酱的Blog</title>
+<title>我tm就是一个智障！！！ | Miku酱的Blog</title>
 <link rel="shortcut icon" href="https://Wowing.github.io/favicon.ico?v=1586085871618">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://Wowing.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="题解 AT3881 【[ARC090A] Candies】 | Miku酱的Blog - Atom Feed" href="https://Wowing.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="我tm就是一个智障！！！ | Miku酱的Blog - Atom Feed" href="https://Wowing.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="看到dalao们都用DP写这道题，萌新不得不弱弱地发声：“这难道不是一道DFS题吗？”
-实际上，我认为这道题目就是赤裸裸的深度优先搜索！唯一要注意的是nnn为000的时候的特判。
-codecodecode:
-#include&lt;bits..." />
-    <meta name="keywords" content="题解" />
+    <meta name="description" content="我tm就是一个智障！！！
+欢迎各位来D我！！！！
+" />
+    <meta name="keywords" content="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
@@ -77,59 +76,24 @@ codecodecode:
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              题解 AT3881 【[ARC090A] Candies】
+              我tm就是一个智障！！！
             </h2>
             <div class="post-info">
               <span>
-                2020-03-05
+                2020-04-05
               </span>
               <span>
-                2 min read
+                1 min read
               </span>
-              
-                <a href="https://Wowing.github.io/tag/mimoasUfJ/" class="post-tag">
-                  # 题解
-                </a>
               
             </div>
             
-              <img class="post-feature-image" src="https://Wowing.github.io/post-images/ti-jie-at3881-arc090a-candies.jpg" alt="">
+              <img class="post-feature-image" src="https://Wowing.github.io/post-images/wo-tm-jiu-shi-yi-ge-zhi-zhang.jpg" alt="">
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>看到dalao们都用DP写这道题，萌新不得不弱弱地发声：“这难道不是一道DFS题吗？”</p>
-<p>实际上，我认为这道题目就是赤裸裸的深度优先搜索！唯一要注意的是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span>为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span>的时候的特判。</p>
-<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>c</mi><mi>o</mi><mi>d</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">code</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">o</span><span class="mord mathdefault">d</span><span class="mord mathdefault">e</span></span></span></span>:</p>
-<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-int n,m,a[41][101];
-//bool f[41][41];
-int maxx;
-void dfs(int x,int y,int sum)
-{
-    if(x&lt;1||x&gt;2||y&lt;1||y&gt;n) return;
-    if(x==2&amp;&amp;y==n) maxx=max(maxx,sum);//maxx取最大值
-    if(x&lt;2) dfs(x+1,y,sum+a[x+1][y]);//搜索
-    dfs(x,y+1,sum+a[x][y+1]);
-}
-int main()
-{
-	//ios::sync_with_stdio(false);
-	int i,j;
-	cin&gt;&gt;n;
-	for(i=1;i&lt;=2;i++)
-	{
-		for(j=1;j&lt;=n;j++)
-		{
-			cin&gt;&gt;a[i][j];
-		}
-	}
-	dfs(1,1,a[1][1]);
-	cout&lt;&lt;maxx;//输出
-    //system(&quot;pause&quot;);
-	return 0;
-}
-</code></pre>
+                <p>我tm就是一个智障！！！</p>
+<p>欢迎各位来D我！！！！</p>
 
               </div>
               <div class="toc-container">
@@ -142,9 +106,9 @@ int main()
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://Wowing.github.io/post/ti-jie-at3919-abc088b-card-game-for-two/">
+            <a href="https://Wowing.github.io/post/ti-jie-at3875-arc089a-traveling/">
               <h3 class="post-title">
-                题解 AT3919 【[ABC088B] Card Game for Two】
+                题解 AT3875 【[ARC089A] Traveling】
               </h3>
             </a>
           </div>
