@@ -2,11 +2,13 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Wowing.github.io</id>
     <title>⑨⑨⑨感冒灵的幻想之地</title>
-    <updated>2020-06-26T12:33:26.586Z</updated>
+    <updated>2020-06-26T12:50:24.819Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Wowing.github.io"/>
     <link rel="self" href="https://Wowing.github.io/atom.xml"/>
-    <subtitle>为美好的世界献上祝福！</subtitle>
+    <subtitle>&lt;embed src=&quot;//music.163.com/style/swf/widget.swf?sid=1333336766&amp;type=2&amp;auto=1&amp;width=320&amp;height=66&quot; width=&quot;340&quot; height=&quot;86&quot;  allowNetworking=&quot;all&quot;&gt;&lt;/embed&gt;
+
+Music,走起！</subtitle>
     <logo>https://Wowing.github.io/images/avatar.png</logo>
     <icon>https://Wowing.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, ⑨⑨⑨感冒灵的幻想之地</rights>
