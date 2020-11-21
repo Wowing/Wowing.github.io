@@ -54,126 +54,185 @@
         <main id="main" class="site-main" role="main">
             <article id="post-1270" class="post-1270 post type-post status-publish format-standard hentry category-90 category-129 tag-149">
                 <header class="entry-header">
-                    <h1 class="entry-title">瑞安市信息学竞赛复赛前练习2 1754 Problem D看比赛 题解</h1>
+                    <h1 class="entry-title">关于美化桌面那些事</h1>
                     <p class="entry-census">发布于 2020-11-21</p>
                     <hr>
                 </header>
                 <div class="neko">
-                    <h1 id="题目描述">题目描述</h1>
-<p>比赛开始了，KK 准备记录下每一个重要的事件：红黄牌和进球。</p>
-<p>假设只有A 队和B队，每队的号码是1~11 号。</p>
-<p>进球事件的表示：Goal A 表示A 进球，Goal B 相反</p>
-<p>红牌事件：RedCard A 1表示A队1 号被红牌罚下</p>
-<p>黄牌事件：YellowCard B 2表示B队2号被黄牌警告<br>
-注意，一个人如果被警告两次就将被罚下（相当于一张红牌）。</p>
-<p>现在，要输出的是两队的比分、被罚下的名单和被警告的名单。</p>
-<h2 id="输入">输入：</h2>
-<p>第一行，一个整数n，表示重要事件的个数（n&lt;1000）</p>
-<p>之后n 行，每行一个事件，如果第一个词语是Goal，之后输入</p>
-<p>进球的编号；如果第一个词语是 RedCard 或YellowCard，那么之后<br>
-输入队伍和号码。</p>
-<h2 id="输出">输出：</h2>
-<p>第一行，格式为A(A 的得分):(B 的得分)B<br>
-第二行，输出”SentOff:”</p>
-<p>之后若干行，每行一个 A 或B，一个号码，表示被罚下的人，之间用空格隔开，规定先 A 后B，按号码大小排序。</p>
-<p>下一行，输出”Warning:”</p>
-<p>之后若干行，每行一个 A 或B，一个号码，表示被警告的人，之<br>
-间用空格隔开，规定先 A 后B，按号码大小排序。</p>
-<h3 id="样例输入">样例输入</h3>
-<pre><code>8 
-Goal A 
-RedCard A 4 
-Goal B 
-YellowCard B 8 
-Goal B 
-YellowCard B 8 
-YellowCard B 10 
-Goal B 
-</code></pre>
-<h3 id="样例输出">样例输出</h3>
-<pre><code>A(1):(3)B 
-SentOff:
-A 4 
-B 8 
-Warning:
-B 10 
-</code></pre>
-<h2 id="提示">提示</h2>
-<p>【样例解释1】</p>
-<p>B 队进了 3 个球，A 队进了一个。</p>
-<p>A 队 4 号被罚下，B 队 8 号累<br>
-积两张黄牌下场，</p>
-<p>B队的10 号被黄牌警告一次</p>
-<h1 id="题解">题解</h1>
-<p>首先呢，通过它给我们的样例，可以清楚地看出来这是一道暴力大水题。</p>
-<p>可是有一点要注意的是，它的字符串读入是带空格的。在去年上级复赛的时候，就是由于这一点导致我的IDE崩溃</p>
-<p><strong>其实使用string+char(+int)就可以了</strong></p>
-<p>终于做出了我深恶痛疾的模拟题。然后提醒一下：SentOff和Warning的后面是<strong>没有空格的！！！</strong></p>
-<p>好，上代码：</p>
-<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-int n;
-int a[12],b[12];
-int A,B,tt,a1,b1,a2,b2;
-string k;
-char t;
-int main()
-{
-    cin&gt;&gt;n;
-    for(int i=1;i&lt;=n;i++)
-    {
-        cin&gt;&gt;k;
-        if(k==&quot;Goal&quot;) 
-        {
-            cin&gt;&gt;t;//空格会忽略掉
-            if(t=='A') A++;
-            else B++;
-        }
-        else
-        {
-            if(k[0]=='R')
-            {
-                cin&gt;&gt;t;
-                cin&gt;&gt;tt;
-                if(t=='A') a[tt]-=2;
-                if(t=='B') b[tt]-=2;//大于
-            }
-            if(k[0]=='Y')
-            {
-                cin&gt;&gt;t;
-                cin&gt;&gt;tt;
-                if(t=='A') a[tt]-=1;
-                if(t=='B') b[tt]-=1;
-            }
-        }
-    }
-    for(int i=1;i&lt;=11;i++) if(a[i]&lt;-2||a[i]==-2) a1++;
-    for(int i=1;i&lt;=11;i++) if(b[i]&lt;-2||b[i]==-2) b1++;
-    for(int i=1;i&lt;=11;i++) if(a[i]==-1) a2++;
-    for(int i=1;i&lt;=11;i++) if(b[i]==-1) b2++;
-    cout&lt;&lt;&quot;A(&quot;&lt;&lt;A&lt;&lt;&quot;):&quot;&lt;&lt;&quot;(&quot;&lt;&lt;B&lt;&lt;&quot;)B&quot;&lt;&lt;endl;
-    cout&lt;&lt;&quot;SentOff:&quot;&lt;&lt;endl;
-    if(a1&gt;0) 
-    {
-        for(int i=1;i&lt;=11;i++) if(a[i]&lt;-2||a[i]==-2) cout&lt;&lt;&quot;A &quot;&lt;&lt;i&lt;&lt;&quot; &quot;&lt;&lt;endl;
-    }
-    if(b1&gt;0) 
-    {
-        for(int i=1;i&lt;=11;i++) if(b[i]&lt;-2||b[i]==-2) cout&lt;&lt;&quot;B &quot;&lt;&lt;i&lt;&lt;&quot; &quot;&lt;&lt;endl;
-    }
-    cout&lt;&lt;&quot;Warning:&quot;&lt;&lt;endl;
-    if(a2&gt;0) 
-    {
-        for(int i=1;i&lt;=11;i++) if(a[i]==-1) cout&lt;&lt;&quot;A &quot;&lt;&lt;i&lt;&lt;&quot; &quot;&lt;&lt;endl;
-    }
-    if(b2&gt;0) 
-    {
-        for(int i=1;i&lt;=11;i++) if(b[i]==-1) cout&lt;&lt;&quot;B &quot;&lt;&lt;i&lt;&lt;&quot; &quot;&lt;&lt;endl;
-    }
-    return 0;
-}
-
-</code></pre>
+                    <p>一个清爽好看的桌面就显得很高逼格的说（</p>
+<h1 id="-1我们为什么要美化桌面">-1.我们为什么要美化桌面?</h1>
+<ul>
+<li>
+<p>一个好的桌面能留给人好印象</p>
+</li>
+<li>
+<p>桌面的整洁也能更方便查找</p>
+</li>
+<li>
+<p>美观的桌面看着就舒服</p>
+</li>
+</ul>
+<h1 id="0结果">0.结果</h1>
+<p><strong>先给各位看一下我原来的桌面</strong></p>
+<figure data-type="image" tabindex="1"><img src="https://cdn.luogu.com.cn/upload/image_hosting/mle3ozqu.png" alt="" loading="lazy"></figure>
+<p>显得比较杂乱<s>请无视某些神奇的东西</s></p>
+<p><strong>然后就是现在的桌面</strong></p>
+<figure data-type="image" tabindex="2"><img src="https://cdn.luogu.com.cn/upload/image_hosting/dbgs1r22.png" alt="" loading="lazy"></figure>
+<p>看上去比较清爽</p>
+<h1 id="1软件选择">1.软件选择</h1>
+<p>由于软件多而杂，这里只放出一部分比较知名的软件</p>
+<h2 id="rainmeter">Rainmeter</h2>
+<p>大部分的桌面美化者都会选择Rainmeter</p>
+<h3 id="优点">优点</h3>
+<ul>
+<li>
+<p>主题多</p>
+</li>
+<li>
+<p>自定义空间大</p>
+</li>
+<li>
+<p>大多主题较酷炫</p>
+</li>
+<li>
+<p>人多</p>
+</li>
+</ul>
+<h3 id="缺点">缺点</h3>
+<ul>
+<li>
+<p>资源比较杂</p>
+</li>
+<li>
+<p>大部分资源年头较久</p>
+</li>
+<li>
+<p>皮肤代码难上手</p>
+</li>
+<li>
+<p>不能修改系统视觉样式</p>
+</li>
+</ul>
+<h2 id="upupoo">UPUPOO</h2>
+<p>啊噗啊噗作为动态壁纸与美化也很不错</p>
+<h3 id="优点-2">优点</h3>
+<ul>
+<li>
+<p>壁纸资源多</p>
+</li>
+<li>
+<p>组件好看</p>
+</li>
+<li>
+<p>能美化状态栏</p>
+</li>
+</ul>
+<h3 id="缺点-2">缺点</h3>
+<ul>
+<li>
+<p>单机版不带资源，贴吧资源难找</p>
+</li>
+<li>
+<p>联网软件需要激活码，白嫖党再见</p>
+</li>
+<li>
+<p>功能少</p>
+</li>
+</ul>
+<h2 id="rocketdock">RocketDock</h2>
+<p>这是模仿mac的Dock</p>
+<h3 id="优点-3">优点</h3>
+<ul>
+<li>
+<p>好用</p>
+</li>
+<li>
+<p>方便</p>
+</li>
+</ul>
+<h3 id="缺点-3">缺点</h3>
+<ul>
+<li>
+<p>自带外貌丑，要去找图标图片替换</p>
+</li>
+<li>
+<p>功能单一</p>
+</li>
+</ul>
+<h2 id="wallpaper-engineer">wallpaper engineer</h2>
+<p>这我没钱买不了，只能根据其他人的总结</p>
+<h3 id="优点-4">优点</h3>
+<ul>
+<li>
+<p>创意工坊质量高</p>
+</li>
+<li>
+<p>桌面可以互动</p>
+</li>
+<li>
+<p>有趣</p>
+</li>
+</ul>
+<h3 id="缺点-4">缺点</h3>
+<ul>
+<li>
+<p>要钱</p>
+</li>
+<li>
+<p>容易让你沉迷其中无法自拔</p>
+</li>
+</ul>
+<h2 id="live2d-wallpaper">live2d wallpaper</h2>
+<p>有趣的live2d互动软件</p>
+<h3 id="优点-5">优点</h3>
+<ul>
+<li>
+<p>能和萌妹子互动</p>
+</li>
+<li>
+<p>有趣</p>
+</li>
+</ul>
+<h3 id="缺点-5">缺点</h3>
+<ul>
+<li>
+<p>资源难找</p>
+</li>
+<li>
+<p>功能单一</p>
+</li>
+</ul>
+<h1 id="2正式美化">2.正式美化</h1>
+<p>一般来说我们可以把多个软件搭配着用，比如我的桌面就是Rainmeter+UPUPOO+RocketDock，在这里我主要讲Rainmeter</p>
+<p>首先，在Rainmeter的官网下载此软件</p>
+<figure data-type="image" tabindex="3"><img src="https://cdn.luogu.com.cn/upload/image_hosting/14kvmqj4.png" alt="" loading="lazy"></figure>
+<p>这是真正的官网</p>
+<figure data-type="image" tabindex="4"><img src="https://cdn.luogu.com.cn/upload/image_hosting/dd8lsyaw.png" alt="" loading="lazy"></figure>
+<p>这是社区</p>
+<p><strong>官网下载比较缓慢，而美化社区虽然下载可能快一点但是要钱</strong></p>
+<p>下载完成并且安装后你的桌面会出现丑不拉几的这种东西</p>
+<figure data-type="image" tabindex="5"><img src="https://cdn.luogu.com.cn/upload/image_hosting/0w5jbqf1.png" alt="" loading="lazy"></figure>
+<p>就可以在这个皮肤上鼠标右键</p>
+<figure data-type="image" tabindex="6"><img src="https://cdn.luogu.com.cn/upload/image_hosting/hjm63u2l.png" alt="" loading="lazy"></figure>
+<p>选最后一个关闭</p>
+<p>接着就可以愉快地下载皮肤了！建议到Rainmeter吧去下载资源。<a href="https://tieba.baidu.com/f?kw=rainmeter">link</a></p>
+<p>一般下载完成后，会出现这个东西</p>
+<figure data-type="image" tabindex="7"><img src="https://cdn.luogu.com.cn/upload/image_hosting/99fxsyot.png" alt="" loading="lazy"></figure>
+<p>双击+Install或右键+用Rainmeter打开即可安装</p>
+<p>如果为文件夹类型，需要把文件夹复制到C:\Users\Administrator\Documents\Rainmeter\Skins</p>
+<p>安装完毕后，就可以使用啦！</p>
+<p>打开Rainmeter，在管理器中选择刚刚安装的文件夹并且打开</p>
+<figure data-type="image" tabindex="8"><img src="https://cdn.luogu.com.cn/upload/image_hosting/modscfc1.png" alt="" loading="lazy"></figure>
+<p>接着，要找到<strong>ini</strong>文件，双击即可启动皮肤，也可以拖动皮肤</p>
+<p>那么Rainmeter大概就讲到这里</p>
+<h1 id="3rainmeter资源链接">3.Rainmeter资源链接</h1>
+<p><a href="https://zhutix.com/tag/rainmeter/">致美化</a></p>
+<p><a href="https://bbs.rainmeter.cn/">雨滴社区（要钱）</a></p>
+<p><a href="https://www.zhihu.com/question/41919407">知乎</a></p>
+<p><a href="https://tieba.baidu.com/f?kw=rainmeter&amp;ie=utf-8&amp;tab=good">贴吧</a></p>
+<h1 id="4结语">4.结语</h1>
+<p>非常感谢您的阅读！</p>
+<p>桌面美化的方式还有很多，我也不大清楚，如果有不足的地方，还请指出qwq</p>
 
                 </div>
             </article>
@@ -183,20 +242,14 @@ int main()
         <div class="mdui-container">
             <div class="mdui-row">
                 
-                <a href="https://Wowing.github.io/post/guan-yu-mei-hua-zhuo-mian-na-xie-shi/" class="mdui-ripple mdui-color-theme mdui-col-xs-2 mdui-col-sm-6 doc-footer-nav-left">
-                    <div class="doc-footer-nav-text">
-                        <i class="mdui-icon material-icons">arrow_back</i>
-                        <span class="doc-footer-nav-direction mdui-hidden-xs-down">上一篇文章</span>
-                        <div class="doc-footer-nav-chapter mdui-hidden-xs-down">关于美化桌面那些事</div>
-                    </div>
-                </a>
+                <div class="mdui-col-xs-2 mdui-col-sm-6 doc-footer-nav-left"></div>
                 
                 
-                <a href="https://Wowing.github.io/post/ti-jie-p1617-ai-yu-chou-de-yi-qian-ge-shang-xin-de-li-you/" class="mdui-ripple mdui-color-theme mdui-col-xs-10 mdui-col-sm-6 doc-footer-nav-right">
+                <a href="https://Wowing.github.io/post/OrzGoal/" class="mdui-ripple mdui-color-theme mdui-col-xs-10 mdui-col-sm-6 doc-footer-nav-right">
                     <div class="doc-footer-nav-text">
                         <i class="mdui-icon material-icons">arrow_forward</i>
                         <span class="doc-footer-nav-direction">下一篇文章</span>
-                        <div class="doc-footer-nav-chapter">题解 P1617 【爱与愁的一千个伤心的理由】</div>
+                        <div class="doc-footer-nav-chapter">瑞安市信息学竞赛复赛前练习2 1754 Problem D看比赛 题解</div>
                     </div>
                 </a>
                 
