@@ -59,12 +59,12 @@
                     <hr>
                 </header>
                 <div class="neko">
-                    <p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi><mi>E</mi></mrow><annotation encoding="application/x-tex">RE</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span></span></span></span>了好久，结果发现是<code>system(&quot;pause&quot;);</code>的错误。</p>
+                    <p>RE了好久，结果发现是<code>system(&quot;pause&quot;);</code>的错误。</p>
 <p>首先，看到这道题目，可能很多萌新和我一样是一脸茫然的。“这不是背包/动规吗？怎么成入门题了呢？”</p>
 <p>先别急，仔细看题目后，我们可以把题目概括成这样：</p>
-<p>有<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span>组数，第<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>个组数有<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi><mi>i</mi></mrow><annotation encoding="application/x-tex">ki</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord mathdefault">i</span></span></span></span>个数字。只要你的数字高于第<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>个数，这一组数字就属于你了。问你能得到几组数字？分别是第几组？</p>
+<p>有n组数，第i个组数有ki个数字。只要你的数字高于第i个数，这一组数字就属于你了。问你能得到几组数字？分别是第几组？</p>
 <p>这样就简单很多了吧......</p>
-<p>只要这个数组的数有一个小于你的数，就可以把<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mi>i</mi></mrow><annotation encoding="application/x-tex">ai</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault">i</span></span></span></span>标记为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>。最后输出<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mi>n</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">ans</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span></span></span></span>即可。</p>
+<p>只要这个数组的数有一个小于你的数，就可以把ai标记为1。最后输出ans即可。</p>
 <p>上代码：</p>
 <pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
 using namespace std;
@@ -89,7 +89,7 @@ int main()
     return 0;
 }
 </code></pre>
-<p>值得一提的是：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mi>n</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">ans</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span></span></span></span>是<strong>你得到的数组数量</strong>，而不是你能得到的数字的数量。</p>
+<p>值得一提的是：ans是<strong>你得到的数组数量</strong>，而不是你能得到的数字的数量。</p>
 
                 </div>
             </article>
