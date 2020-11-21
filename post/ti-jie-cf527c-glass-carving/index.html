@@ -54,100 +54,88 @@
         <main id="main" class="site-main" role="main">
             <article id="post-1270" class="post-1270 post type-post status-publish format-standard hentry category-90 category-129 tag-149">
                 <header class="entry-header">
-                    <h1 class="entry-title">题解 AT3875 【[ARC089A] Traveling】</h1>
-                    <p class="entry-census">发布于 2020-04-05</p>
+                    <h1 class="entry-title">题解 CF527C 【Glass Carving】</h1>
+                    <p class="entry-census">发布于 2020-11-21</p>
                     <hr>
                 </header>
                 <div class="neko">
-                    <p>有生之年居然能够入门题WA，果然我太菜了</p>
-<p>好，进入正题：</p>
-<p>一开始我看到这样的题目，第一反应就是万能的dfs！</p>
-<p>思路：搜索路线，由于求最短时间所以可以直接剪枝向左和向上。而求出最短时间比较即可。</p>
-<p>代码分数：0</p>
-<p>代码：</p>
+                    <h3 id="题意">题意</h3>
+<p>有一个w*h的矩形,每次要么横着切一刀,要么竖着切一刀,每次你都要回答切完后最大的子矩形的面积。</p>
+<p>要么是横着在y位置切一刀,要么是竖着在x位置切一刀.</p>
+<h3 id="题解">题解</h3>
+<p>原来想着用暴力写，但是数据范围比较大：2 &lt;= w, h &lt;= 200000, 1 &lt;= n &lt;= 200000。然后就想到了STL。</p>
+<p>用两个multiset和两个set分别储存切的痕迹与原来的，面积就是最大的长和宽相乘。</p>
+<p>代码</p>
 <pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+#define its set&lt;int&gt;::iterator
+#define is mulitset&lt;int&gt;::iterator
+
 using namespace std;
-int n,m,a[41][101],t,fl;
-int flag=0;
-//bool f[41][41];
-int minn=1e9;
-void dfs(int x,int y,int sum)//dfs
-{
-    if(x&lt;1||x&gt;n||y&lt;1||y&gt;m) return;
-    if(x==n&amp;&amp;y==m) minn=min(minn,sum);
-    dfs(x+1,y,sum+1);
-    dfs(x,y+1,sum+1);
-}
-int main()
-{
-	//ios::sync_with_stdio(false);
-	int i,j;
-	cin&gt;&gt;t;
-    while(t--)
+int w,h,n;
+multiset&lt;int&gt; sx;
+multiset&lt;int&gt; sy;
+set&lt;int&gt; x;
+set&lt;int&gt; y;
+int main(){
+
+    scanf(&quot;%d%d%d&quot;,&amp;w,&amp;h,&amp;n);
+    x.insert(0);
+    x.insert(h);
+    y.insert(w);
+    y.insert(0);
+    sx.insert(h);
+    sy.insert(w);
+    for(int i=1;i&lt;=n;++i)
     {
-        minn=1e9;
-        cin&gt;&gt;fl&gt;&gt;n&gt;&gt;m;
-        dfs(1,1,0);
-        if(minn&gt;fl||minn==0) flag=1;
-        //cout&lt;&lt;minn&lt;&lt;&quot; &quot;&lt;&lt;flag&lt;&lt;endl;
-        //else cout&lt;&lt;&quot;No&quot;;
-        //cout&lt;&lt;endl;
+        char c;
+        int p;
+        cin&gt;&gt;c;
+        scanf(&quot;%d&quot;,&amp;p);
+
+        if(c=='V')
+        {
+            y.insert(p);
+            its it,itt;
+            it=y.lower_bound(p);
+            itt=y.upper_bound(p);
+            --it;
+
+            int ls,rs;
+            ls=p-*it;
+            rs=*itt-p;
+            int ss=*itt-*it;
+            //cout&lt;&lt;*itt&lt;&lt;&quot; &quot;&lt;&lt;*it&lt;&lt;&quot; &quot;&lt;&lt;ss&lt;&lt;endl;
+            sy.erase(sy.find(ss));
+            sy.insert(ls);
+            sy.insert(rs);
+        }
+        else
+        {
+            x.insert(p);
+            its it,itt;
+            it=x.lower_bound(p);
+            itt=x.upper_bound(p);
+            --it;
+
+            int ls,rs;
+            ls=p-*it;
+            rs=*itt-p;
+            int ss=*itt-*it;
+            //cout&lt;&lt;*itt&lt;&lt;&quot; &quot;&lt;&lt;*it&lt;&lt;&quot; &quot;&lt;&lt;ss&lt;&lt;endl;
+            sx.erase(sx.find(ss));
+            sx.insert(rs);
+            sx.insert(ls);
+
+        }
+        int a,b;
+        a=*(--sx.end());
+        b=*(--sy.end());
+        printf(&quot;%lld\n&quot;,(1LL)*a*b);
     }
-    if(flag) cout&lt;&lt;&quot;No&quot;;
-    else cout&lt;&lt;&quot;Yes&quot;;
-	//dfs(1,1,a[1][1]);
-	//cout&lt;&lt;maxx;
-    //system(&quot;pause&quot;);
-	return 0;
+
+    return 0;
 }
 </code></pre>
-<p>反思原因：求的是时间t时能否<strong>到达</strong>，而不是在时间t之前能否到达。</p>
-<p>所以让我们再回过头来看看这道题，可以明显地发现其实所需时间就是x+y嘛！等等，还没完：时间大小判断了，那怎么知道t的时候到底能不能到达目的地呢？</p>
-<p>经过模拟，可以清楚地发现：如果你要在t时间到达的话，最短时间到目的地后，可以<strong>不停地往回走一格再走回来，往回走一格再走回来......</strong></p>
-<p>所以，可以发现，只要剩余的时间mod2余数为0的时候，结果就一定能够到达！</p>
-<p>代码：</p>
-<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-int n,m,t,fl;
-int flag=0;
-//bool f[41][41];
-int minn=1e9;
-void dfs(int x,int y,int sum)
-{
-    if(sum&gt;minn) return;
-    if(x&lt;1||x&gt;n||y&lt;1||y&gt;m) return;
-    if(x==n&amp;&amp;y==m) minn=min(minn,sum);
-    dfs(x+1,y,sum+1);
-    dfs(x,y+1,sum+1);
-}
-int main()
-{
-	//ios::sync_with_stdio(false);
-	int i,j;
-	cin&gt;&gt;t;
-    while(t--)
-    {
-        cin&gt;&gt;fl&gt;&gt;n&gt;&gt;m;
-        if(n+m&gt;fl) //时间太短，原地升天
-        {
-            flag=1;
-            break;
-        }
-        if((fl-n-m)%2==1) //走了不回，原地升天
-        {
-            flag=1;
-            break;//只要不行，直接走也
-        }
-    }
-    if(flag) cout&lt;&lt;&quot;No&quot;;
-    else cout&lt;&lt;&quot;Yes&quot;;
-	//dfs(1,1,a[1][1]);
-	//cout&lt;&lt;maxx;
-    //system(&quot;pause&quot;);
-	retun 0; //防止抄袭，抵抗之间
-}
-</code></pre>
-<p>完结撒花~</p>
 
                 </div>
             </article>
@@ -157,20 +145,20 @@ int main()
         <div class="mdui-container">
             <div class="mdui-row">
                 
-                <a href="https://Wowing.github.io/post/ti-jie-uva1723-intervals/" class="mdui-ripple mdui-color-theme mdui-col-xs-2 mdui-col-sm-6 doc-footer-nav-left">
+                <a href="https://Wowing.github.io/post/ti-jie-uva1193-radar-installation/" class="mdui-ripple mdui-color-theme mdui-col-xs-2 mdui-col-sm-6 doc-footer-nav-left">
                     <div class="doc-footer-nav-text">
                         <i class="mdui-icon material-icons">arrow_back</i>
                         <span class="doc-footer-nav-direction mdui-hidden-xs-down">上一篇文章</span>
-                        <div class="doc-footer-nav-chapter mdui-hidden-xs-down">题解 UVA1723 【Intervals】</div>
+                        <div class="doc-footer-nav-chapter mdui-hidden-xs-down">题解 UVA1193 【Radar Installation】</div>
                     </div>
                 </a>
                 
                 
-                <a href="https://Wowing.github.io/post/ti-jie-cf441a-valera-and-antique-items/" class="mdui-ripple mdui-color-theme mdui-col-xs-10 mdui-col-sm-6 doc-footer-nav-right">
+                <a href="https://Wowing.github.io/post/ti-jie-cf2b-the-least-round-way/" class="mdui-ripple mdui-color-theme mdui-col-xs-10 mdui-col-sm-6 doc-footer-nav-right">
                     <div class="doc-footer-nav-text">
                         <i class="mdui-icon material-icons">arrow_forward</i>
                         <span class="doc-footer-nav-direction">下一篇文章</span>
-                        <div class="doc-footer-nav-chapter">题解 CF441A 【Valera and Antique Items】</div>
+                        <div class="doc-footer-nav-chapter">题解 CF2B 【The least round way】</div>
                     </div>
                 </a>
                 

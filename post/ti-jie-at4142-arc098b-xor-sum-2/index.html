@@ -54,100 +54,45 @@
         <main id="main" class="site-main" role="main">
             <article id="post-1270" class="post-1270 post type-post status-publish format-standard hentry category-90 category-129 tag-149">
                 <header class="entry-header">
-                    <h1 class="entry-title">题解 AT3875 【[ARC089A] Traveling】</h1>
-                    <p class="entry-census">发布于 2020-04-05</p>
+                    <h1 class="entry-title">题解 AT4142 【[ARC098B] Xor Sum 2】</h1>
+                    <p class="entry-census">发布于 2020-11-21</p>
                     <hr>
                 </header>
                 <div class="neko">
-                    <p>有生之年居然能够入门题WA，果然我太菜了</p>
-<p>好，进入正题：</p>
-<p>一开始我看到这样的题目，第一反应就是万能的dfs！</p>
-<p>思路：搜索路线，由于求最短时间所以可以直接剪枝向左和向上。而求出最短时间比较即可。</p>
-<p>代码分数：0</p>
+                    <p>一道较简单的题目。</p>
+<h3 id="题意">题意</h3>
+<p>给你一些数字，求有多少区间的异或和等于区间的数字之和。</p>
+<h3 id="题解">题解</h3>
+<p>如果直接枚举的话，时间复杂度略高。怎么办呢？可以用两指针，一个指针固定，一个指针滑动。而后，就可以找到最大满足条件的端点了。</p>
 <p>代码：</p>
-<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+<pre><code class="language-cpp">#include&lt;iostream&gt;
+#include&lt;cstring&gt;
 using namespace std;
-int n,m,a[41][101],t,fl;
-int flag=0;
-//bool f[41][41];
-int minn=1e9;
-void dfs(int x,int y,int sum)//dfs
-{
-    if(x&lt;1||x&gt;n||y&lt;1||y&gt;m) return;
-    if(x==n&amp;&amp;y==m) minn=min(minn,sum);
-    dfs(x+1,y,sum+1);
-    dfs(x,y+1,sum+1);
-}
+const int N=200020;
+long long s,n,a[N],ans=0;
 int main()
 {
-	//ios::sync_with_stdio(false);
-	int i,j;
-	cin&gt;&gt;t;
-    while(t--)
-    {
-        minn=1e9;
-        cin&gt;&gt;fl&gt;&gt;n&gt;&gt;m;
-        dfs(1,1,0);
-        if(minn&gt;fl||minn==0) flag=1;
-        //cout&lt;&lt;minn&lt;&lt;&quot; &quot;&lt;&lt;flag&lt;&lt;endl;
-        //else cout&lt;&lt;&quot;No&quot;;
-        //cout&lt;&lt;endl;
-    }
-    if(flag) cout&lt;&lt;&quot;No&quot;;
-    else cout&lt;&lt;&quot;Yes&quot;;
-	//dfs(1,1,a[1][1]);
-	//cout&lt;&lt;maxx;
-    //system(&quot;pause&quot;);
+	cin&gt;&gt;n;
+	//memset(last,0,sizeof(last));
+	for(int i=1;i&lt;=n;i++) cin&gt;&gt;a[i];
+	long long j=0;
+	long long suma=0,sumb=0;
+	for(int i=1;i&lt;=n;i++)
+	{
+		while(j+1&lt;=n&amp;&amp;sumb+a[j+1]==(suma^a[j+1]))//指针滑动
+		{
+			suma^=a[j+1];
+			sumb+=a[j+1];
+			j++;
+		}
+		ans+=j-i+1;
+		suma^=a[i];
+		sumb-=a[i];
+	}
+	cout&lt;&lt;ans;
 	return 0;
 }
 </code></pre>
-<p>反思原因：求的是时间t时能否<strong>到达</strong>，而不是在时间t之前能否到达。</p>
-<p>所以让我们再回过头来看看这道题，可以明显地发现其实所需时间就是x+y嘛！等等，还没完：时间大小判断了，那怎么知道t的时候到底能不能到达目的地呢？</p>
-<p>经过模拟，可以清楚地发现：如果你要在t时间到达的话，最短时间到目的地后，可以<strong>不停地往回走一格再走回来，往回走一格再走回来......</strong></p>
-<p>所以，可以发现，只要剩余的时间mod2余数为0的时候，结果就一定能够到达！</p>
-<p>代码：</p>
-<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-int n,m,t,fl;
-int flag=0;
-//bool f[41][41];
-int minn=1e9;
-void dfs(int x,int y,int sum)
-{
-    if(sum&gt;minn) return;
-    if(x&lt;1||x&gt;n||y&lt;1||y&gt;m) return;
-    if(x==n&amp;&amp;y==m) minn=min(minn,sum);
-    dfs(x+1,y,sum+1);
-    dfs(x,y+1,sum+1);
-}
-int main()
-{
-	//ios::sync_with_stdio(false);
-	int i,j;
-	cin&gt;&gt;t;
-    while(t--)
-    {
-        cin&gt;&gt;fl&gt;&gt;n&gt;&gt;m;
-        if(n+m&gt;fl) //时间太短，原地升天
-        {
-            flag=1;
-            break;
-        }
-        if((fl-n-m)%2==1) //走了不回，原地升天
-        {
-            flag=1;
-            break;//只要不行，直接走也
-        }
-    }
-    if(flag) cout&lt;&lt;&quot;No&quot;;
-    else cout&lt;&lt;&quot;Yes&quot;;
-	//dfs(1,1,a[1][1]);
-	//cout&lt;&lt;maxx;
-    //system(&quot;pause&quot;);
-	retun 0; //防止抄袭，抵抗之间
-}
-</code></pre>
-<p>完结撒花~</p>
 
                 </div>
             </article>
@@ -157,20 +102,20 @@ int main()
         <div class="mdui-container">
             <div class="mdui-row">
                 
-                <a href="https://Wowing.github.io/post/ti-jie-uva1723-intervals/" class="mdui-ripple mdui-color-theme mdui-col-xs-2 mdui-col-sm-6 doc-footer-nav-left">
+                <a href="https://Wowing.github.io/post/ti-jie-at957-he-sitiyaotukana/" class="mdui-ripple mdui-color-theme mdui-col-xs-2 mdui-col-sm-6 doc-footer-nav-left">
                     <div class="doc-footer-nav-text">
                         <i class="mdui-icon material-icons">arrow_back</i>
                         <span class="doc-footer-nav-direction mdui-hidden-xs-down">上一篇文章</span>
-                        <div class="doc-footer-nav-chapter mdui-hidden-xs-down">题解 UVA1723 【Intervals】</div>
+                        <div class="doc-footer-nav-chapter mdui-hidden-xs-down">题解 AT957 【何しちゃおっかな？】</div>
                     </div>
                 </a>
                 
                 
-                <a href="https://Wowing.github.io/post/ti-jie-cf441a-valera-and-antique-items/" class="mdui-ripple mdui-color-theme mdui-col-xs-10 mdui-col-sm-6 doc-footer-nav-right">
+                <a href="https://Wowing.github.io/post/ti-jie-uva1193-radar-installation/" class="mdui-ripple mdui-color-theme mdui-col-xs-10 mdui-col-sm-6 doc-footer-nav-right">
                     <div class="doc-footer-nav-text">
                         <i class="mdui-icon material-icons">arrow_forward</i>
                         <span class="doc-footer-nav-direction">下一篇文章</span>
-                        <div class="doc-footer-nav-chapter">题解 CF441A 【Valera and Antique Items】</div>
+                        <div class="doc-footer-nav-chapter">题解 UVA1193 【Radar Installation】</div>
                     </div>
                 </a>
                 

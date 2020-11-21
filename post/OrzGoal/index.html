@@ -54,100 +54,126 @@
         <main id="main" class="site-main" role="main">
             <article id="post-1270" class="post-1270 post type-post status-publish format-standard hentry category-90 category-129 tag-149">
                 <header class="entry-header">
-                    <h1 class="entry-title">题解 AT3875 【[ARC089A] Traveling】</h1>
-                    <p class="entry-census">发布于 2020-04-05</p>
+                    <h1 class="entry-title">瑞安市信息学竞赛复赛前练习2 1754 Problem D看比赛 题解</h1>
+                    <p class="entry-census">发布于 2020-11-21</p>
                     <hr>
                 </header>
                 <div class="neko">
-                    <p>有生之年居然能够入门题WA，果然我太菜了</p>
-<p>好，进入正题：</p>
-<p>一开始我看到这样的题目，第一反应就是万能的dfs！</p>
-<p>思路：搜索路线，由于求最短时间所以可以直接剪枝向左和向上。而求出最短时间比较即可。</p>
-<p>代码分数：0</p>
-<p>代码：</p>
+                    <h1 id="题目描述">题目描述</h1>
+<p>比赛开始了，KK 准备记录下每一个重要的事件：红黄牌和进球。</p>
+<p>假设只有A 队和B队，每队的号码是1~11 号。</p>
+<p>进球事件的表示：Goal A 表示A 进球，Goal B 相反</p>
+<p>红牌事件：RedCard A 1表示A队1 号被红牌罚下</p>
+<p>黄牌事件：YellowCard B 2表示B队2号被黄牌警告<br>
+注意，一个人如果被警告两次就将被罚下（相当于一张红牌）。</p>
+<p>现在，要输出的是两队的比分、被罚下的名单和被警告的名单。</p>
+<h2 id="输入">输入：</h2>
+<p>第一行，一个整数n，表示重要事件的个数（n&lt;1000）</p>
+<p>之后n 行，每行一个事件，如果第一个词语是Goal，之后输入</p>
+<p>进球的编号；如果第一个词语是 RedCard 或YellowCard，那么之后<br>
+输入队伍和号码。</p>
+<h2 id="输出">输出：</h2>
+<p>第一行，格式为A(A 的得分):(B 的得分)B<br>
+第二行，输出”SentOff:”</p>
+<p>之后若干行，每行一个 A 或B，一个号码，表示被罚下的人，之间用空格隔开，规定先 A 后B，按号码大小排序。</p>
+<p>下一行，输出”Warning:”</p>
+<p>之后若干行，每行一个 A 或B，一个号码，表示被警告的人，之<br>
+间用空格隔开，规定先 A 后B，按号码大小排序。</p>
+<h3 id="样例输入">样例输入</h3>
+<pre><code>8 
+Goal A 
+RedCard A 4 
+Goal B 
+YellowCard B 8 
+Goal B 
+YellowCard B 8 
+YellowCard B 10 
+Goal B 
+</code></pre>
+<h3 id="样例输出">样例输出</h3>
+<pre><code>A(1):(3)B 
+SentOff:
+A 4 
+B 8 
+Warning:
+B 10 
+</code></pre>
+<h2 id="提示">提示</h2>
+<p>【样例解释1】</p>
+<p>B 队进了 3 个球，A 队进了一个。</p>
+<p>A 队 4 号被罚下，B 队 8 号累<br>
+积两张黄牌下场，</p>
+<p>B队的10 号被黄牌警告一次</p>
+<h1 id="题解">题解</h1>
+<p>首先呢，通过它给我们的样例，可以清楚地看出来这是一道暴力大水题。</p>
+<p>可是有一点要注意的是，它的字符串读入是带空格的。在去年上级复赛的时候，就是由于这一点导致我的IDE崩溃</p>
+<p><strong>其实使用string+char(+int)就可以了</strong></p>
+<p>终于做出了我深恶痛疾的模拟题。然后提醒一下：SentOff和Warning的后面是<strong>没有空格的！！！</strong></p>
+<p>好，上代码：</p>
 <pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
 using namespace std;
-int n,m,a[41][101],t,fl;
-int flag=0;
-//bool f[41][41];
-int minn=1e9;
-void dfs(int x,int y,int sum)//dfs
-{
-    if(x&lt;1||x&gt;n||y&lt;1||y&gt;m) return;
-    if(x==n&amp;&amp;y==m) minn=min(minn,sum);
-    dfs(x+1,y,sum+1);
-    dfs(x,y+1,sum+1);
-}
+int n;
+int a[12],b[12];
+int A,B,tt,a1,b1,a2,b2;
+string k;
+char t;
 int main()
 {
-	//ios::sync_with_stdio(false);
-	int i,j;
-	cin&gt;&gt;t;
-    while(t--)
+    cin&gt;&gt;n;
+    for(int i=1;i&lt;=n;i++)
     {
-        minn=1e9;
-        cin&gt;&gt;fl&gt;&gt;n&gt;&gt;m;
-        dfs(1,1,0);
-        if(minn&gt;fl||minn==0) flag=1;
-        //cout&lt;&lt;minn&lt;&lt;&quot; &quot;&lt;&lt;flag&lt;&lt;endl;
-        //else cout&lt;&lt;&quot;No&quot;;
-        //cout&lt;&lt;endl;
-    }
-    if(flag) cout&lt;&lt;&quot;No&quot;;
-    else cout&lt;&lt;&quot;Yes&quot;;
-	//dfs(1,1,a[1][1]);
-	//cout&lt;&lt;maxx;
-    //system(&quot;pause&quot;);
-	return 0;
-}
-</code></pre>
-<p>反思原因：求的是时间t时能否<strong>到达</strong>，而不是在时间t之前能否到达。</p>
-<p>所以让我们再回过头来看看这道题，可以明显地发现其实所需时间就是x+y嘛！等等，还没完：时间大小判断了，那怎么知道t的时候到底能不能到达目的地呢？</p>
-<p>经过模拟，可以清楚地发现：如果你要在t时间到达的话，最短时间到目的地后，可以<strong>不停地往回走一格再走回来，往回走一格再走回来......</strong></p>
-<p>所以，可以发现，只要剩余的时间mod2余数为0的时候，结果就一定能够到达！</p>
-<p>代码：</p>
-<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-int n,m,t,fl;
-int flag=0;
-//bool f[41][41];
-int minn=1e9;
-void dfs(int x,int y,int sum)
-{
-    if(sum&gt;minn) return;
-    if(x&lt;1||x&gt;n||y&lt;1||y&gt;m) return;
-    if(x==n&amp;&amp;y==m) minn=min(minn,sum);
-    dfs(x+1,y,sum+1);
-    dfs(x,y+1,sum+1);
-}
-int main()
-{
-	//ios::sync_with_stdio(false);
-	int i,j;
-	cin&gt;&gt;t;
-    while(t--)
-    {
-        cin&gt;&gt;fl&gt;&gt;n&gt;&gt;m;
-        if(n+m&gt;fl) //时间太短，原地升天
+        cin&gt;&gt;k;
+        if(k==&quot;Goal&quot;) 
         {
-            flag=1;
-            break;
+            cin&gt;&gt;t;//空格会忽略掉
+            if(t=='A') A++;
+            else B++;
         }
-        if((fl-n-m)%2==1) //走了不回，原地升天
+        else
         {
-            flag=1;
-            break;//只要不行，直接走也
+            if(k[0]=='R')
+            {
+                cin&gt;&gt;t;
+                cin&gt;&gt;tt;
+                if(t=='A') a[tt]-=2;
+                if(t=='B') b[tt]-=2;//大于
+            }
+            if(k[0]=='Y')
+            {
+                cin&gt;&gt;t;
+                cin&gt;&gt;tt;
+                if(t=='A') a[tt]-=1;
+                if(t=='B') b[tt]-=1;
+            }
         }
     }
-    if(flag) cout&lt;&lt;&quot;No&quot;;
-    else cout&lt;&lt;&quot;Yes&quot;;
-	//dfs(1,1,a[1][1]);
-	//cout&lt;&lt;maxx;
-    //system(&quot;pause&quot;);
-	retun 0; //防止抄袭，抵抗之间
+    for(int i=1;i&lt;=11;i++) if(a[i]&lt;-2||a[i]==-2) a1++;
+    for(int i=1;i&lt;=11;i++) if(b[i]&lt;-2||b[i]==-2) b1++;
+    for(int i=1;i&lt;=11;i++) if(a[i]==-1) a2++;
+    for(int i=1;i&lt;=11;i++) if(b[i]==-1) b2++;
+    cout&lt;&lt;&quot;A(&quot;&lt;&lt;A&lt;&lt;&quot;):&quot;&lt;&lt;&quot;(&quot;&lt;&lt;B&lt;&lt;&quot;)B&quot;&lt;&lt;endl;
+    cout&lt;&lt;&quot;SentOff:&quot;&lt;&lt;endl;
+    if(a1&gt;0) 
+    {
+        for(int i=1;i&lt;=11;i++) if(a[i]&lt;-2||a[i]==-2) cout&lt;&lt;&quot;A &quot;&lt;&lt;i&lt;&lt;&quot; &quot;&lt;&lt;endl;
+    }
+    if(b1&gt;0) 
+    {
+        for(int i=1;i&lt;=11;i++) if(b[i]&lt;-2||b[i]==-2) cout&lt;&lt;&quot;B &quot;&lt;&lt;i&lt;&lt;&quot; &quot;&lt;&lt;endl;
+    }
+    cout&lt;&lt;&quot;Warning:&quot;&lt;&lt;endl;
+    if(a2&gt;0) 
+    {
+        for(int i=1;i&lt;=11;i++) if(a[i]==-1) cout&lt;&lt;&quot;A &quot;&lt;&lt;i&lt;&lt;&quot; &quot;&lt;&lt;endl;
+    }
+    if(b2&gt;0) 
+    {
+        for(int i=1;i&lt;=11;i++) if(b[i]==-1) cout&lt;&lt;&quot;B &quot;&lt;&lt;i&lt;&lt;&quot; &quot;&lt;&lt;endl;
+    }
+    return 0;
 }
+
 </code></pre>
-<p>完结撒花~</p>
 
                 </div>
             </article>
@@ -157,20 +183,14 @@ int main()
         <div class="mdui-container">
             <div class="mdui-row">
                 
-                <a href="https://Wowing.github.io/post/ti-jie-uva1723-intervals/" class="mdui-ripple mdui-color-theme mdui-col-xs-2 mdui-col-sm-6 doc-footer-nav-left">
-                    <div class="doc-footer-nav-text">
-                        <i class="mdui-icon material-icons">arrow_back</i>
-                        <span class="doc-footer-nav-direction mdui-hidden-xs-down">上一篇文章</span>
-                        <div class="doc-footer-nav-chapter mdui-hidden-xs-down">题解 UVA1723 【Intervals】</div>
-                    </div>
-                </a>
+                <div class="mdui-col-xs-2 mdui-col-sm-6 doc-footer-nav-left"></div>
                 
                 
-                <a href="https://Wowing.github.io/post/ti-jie-cf441a-valera-and-antique-items/" class="mdui-ripple mdui-color-theme mdui-col-xs-10 mdui-col-sm-6 doc-footer-nav-right">
+                <a href="https://Wowing.github.io/post/ti-jie-p1617-ai-yu-chou-de-yi-qian-ge-shang-xin-de-li-you/" class="mdui-ripple mdui-color-theme mdui-col-xs-10 mdui-col-sm-6 doc-footer-nav-right">
                     <div class="doc-footer-nav-text">
                         <i class="mdui-icon material-icons">arrow_forward</i>
                         <span class="doc-footer-nav-direction">下一篇文章</span>
-                        <div class="doc-footer-nav-chapter">题解 CF441A 【Valera and Antique Items】</div>
+                        <div class="doc-footer-nav-chapter">题解 P1617 【爱与愁的一千个伤心的理由】</div>
                     </div>
                 </a>
                 

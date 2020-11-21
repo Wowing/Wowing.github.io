@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Wowing.github.io</id>
     <title>Arcadia</title>
-    <updated>2020-11-21T12:15:20.026Z</updated>
+    <updated>2020-11-21T12:51:42.520Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Wowing.github.io"/>
     <link rel="self" href="https://Wowing.github.io/atom.xml"/>
@@ -10,6 +10,557 @@
     <logo>https://Wowing.github.io/images/avatar.png</logo>
     <icon>https://Wowing.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Arcadia</rights>
+    <entry>
+        <title type="html"><![CDATA[瑞安市信息学竞赛复赛前练习2 1754 Problem D看比赛 题解]]></title>
+        <id>https://Wowing.github.io/post/OrzGoal/</id>
+        <link href="https://Wowing.github.io/post/OrzGoal/">
+        </link>
+        <updated>2020-11-21T12:42:44.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目描述">题目描述</h1>
+<p>比赛开始了，KK 准备记录下每一个重要的事件：红黄牌和进球。</p>
+<p>假设只有A 队和B队，每队的号码是1~11 号。</p>
+<p>进球事件的表示：Goal A 表示A 进球，Goal B 相反</p>
+<p>红牌事件：RedCard A 1表示A队1 号被红牌罚下</p>
+<p>黄牌事件：YellowCard B 2表示B队2号被黄牌警告<br>
+注意，一个人如果被警告两次就将被罚下（相当于一张红牌）。</p>
+<p>现在，要输出的是两队的比分、被罚下的名单和被警告的名单。</p>
+<h2 id="输入">输入：</h2>
+<p>第一行，一个整数n，表示重要事件的个数（n&lt;1000）</p>
+<p>之后n 行，每行一个事件，如果第一个词语是Goal，之后输入</p>
+<p>进球的编号；如果第一个词语是 RedCard 或YellowCard，那么之后<br>
+输入队伍和号码。</p>
+<h2 id="输出">输出：</h2>
+<p>第一行，格式为A(A 的得分):(B 的得分)B<br>
+第二行，输出”SentOff:”</p>
+<p>之后若干行，每行一个 A 或B，一个号码，表示被罚下的人，之间用空格隔开，规定先 A 后B，按号码大小排序。</p>
+<p>下一行，输出”Warning:”</p>
+<p>之后若干行，每行一个 A 或B，一个号码，表示被警告的人，之<br>
+间用空格隔开，规定先 A 后B，按号码大小排序。</p>
+<h3 id="样例输入">样例输入</h3>
+<pre><code>8 
+Goal A 
+RedCard A 4 
+Goal B 
+YellowCard B 8 
+Goal B 
+YellowCard B 8 
+YellowCard B 10 
+Goal B 
+</code></pre>
+<h3 id="样例输出">样例输出</h3>
+<pre><code>A(1):(3)B 
+SentOff:
+A 4 
+B 8 
+Warning:
+B 10 
+</code></pre>
+<h2 id="提示">提示</h2>
+<p>【样例解释1】</p>
+<p>B 队进了 3 个球，A 队进了一个。</p>
+<p>A 队 4 号被罚下，B 队 8 号累<br>
+积两张黄牌下场，</p>
+<p>B队的10 号被黄牌警告一次</p>
+<h1 id="题解">题解</h1>
+<p>首先呢，通过它给我们的样例，可以清楚地看出来这是一道暴力大水题。</p>
+<p>可是有一点要注意的是，它的字符串读入是带空格的。在去年上级复赛的时候，就是由于这一点导致我的IDE崩溃</p>
+<p><strong>其实使用string+char(+int)就可以了</strong></p>
+<p>终于做出了我深恶痛疾的模拟题。然后提醒一下：SentOff和Warning的后面是<strong>没有空格的！！！</strong></p>
+<p>好，上代码：</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int n;
+int a[12],b[12];
+int A,B,tt,a1,b1,a2,b2;
+string k;
+char t;
+int main()
+{
+    cin&gt;&gt;n;
+    for(int i=1;i&lt;=n;i++)
+    {
+        cin&gt;&gt;k;
+        if(k==&quot;Goal&quot;) 
+        {
+            cin&gt;&gt;t;//空格会忽略掉
+            if(t=='A') A++;
+            else B++;
+        }
+        else
+        {
+            if(k[0]=='R')
+            {
+                cin&gt;&gt;t;
+                cin&gt;&gt;tt;
+                if(t=='A') a[tt]-=2;
+                if(t=='B') b[tt]-=2;//大于
+            }
+            if(k[0]=='Y')
+            {
+                cin&gt;&gt;t;
+                cin&gt;&gt;tt;
+                if(t=='A') a[tt]-=1;
+                if(t=='B') b[tt]-=1;
+            }
+        }
+    }
+    for(int i=1;i&lt;=11;i++) if(a[i]&lt;-2||a[i]==-2) a1++;
+    for(int i=1;i&lt;=11;i++) if(b[i]&lt;-2||b[i]==-2) b1++;
+    for(int i=1;i&lt;=11;i++) if(a[i]==-1) a2++;
+    for(int i=1;i&lt;=11;i++) if(b[i]==-1) b2++;
+    cout&lt;&lt;&quot;A(&quot;&lt;&lt;A&lt;&lt;&quot;):&quot;&lt;&lt;&quot;(&quot;&lt;&lt;B&lt;&lt;&quot;)B&quot;&lt;&lt;endl;
+    cout&lt;&lt;&quot;SentOff:&quot;&lt;&lt;endl;
+    if(a1&gt;0) 
+    {
+        for(int i=1;i&lt;=11;i++) if(a[i]&lt;-2||a[i]==-2) cout&lt;&lt;&quot;A &quot;&lt;&lt;i&lt;&lt;&quot; &quot;&lt;&lt;endl;
+    }
+    if(b1&gt;0) 
+    {
+        for(int i=1;i&lt;=11;i++) if(b[i]&lt;-2||b[i]==-2) cout&lt;&lt;&quot;B &quot;&lt;&lt;i&lt;&lt;&quot; &quot;&lt;&lt;endl;
+    }
+    cout&lt;&lt;&quot;Warning:&quot;&lt;&lt;endl;
+    if(a2&gt;0) 
+    {
+        for(int i=1;i&lt;=11;i++) if(a[i]==-1) cout&lt;&lt;&quot;A &quot;&lt;&lt;i&lt;&lt;&quot; &quot;&lt;&lt;endl;
+    }
+    if(b2&gt;0) 
+    {
+        for(int i=1;i&lt;=11;i++) if(b[i]==-1) cout&lt;&lt;&quot;B &quot;&lt;&lt;i&lt;&lt;&quot; &quot;&lt;&lt;endl;
+    }
+    return 0;
+}
+
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[题解 P1617 【爱与愁的一千个伤心的理由】]]></title>
+        <id>https://Wowing.github.io/post/ti-jie-p1617-ai-yu-chou-de-yi-qian-ge-shang-xin-de-li-you/</id>
+        <link href="https://Wowing.github.io/post/ti-jie-p1617-ai-yu-chou-de-yi-qian-ge-shang-xin-de-li-you/">
+        </link>
+        <updated>2020-11-21T12:22:54.000Z</updated>
+        <content type="html"><![CDATA[<p>这道题的题目梗概就是：输入一个1~4位的数字，输出它的英文。</p>
+<p>我们不妨分类一下：</p>
+<p>1位：直接输出</p>
+<pre><code>        十几或几十直接输出
+</code></pre>
+<p>2位：</p>
+<pre><code>        否则输出几十+一位
+        
+        几百直接输出
+</code></pre>
+<p>3位：</p>
+<pre><code>	否则输出几百+两位
+    
+        几千直接输出
+</code></pre>
+<p>4位：</p>
+<pre><code>	否则输出几千+3位
+</code></pre>
+<p>另外，只要两个位数间有0,且0的两边不为0，输出“and”</p>
+<p><strong>注意：记得特判0的英文zero！！！</strong></p>
+<p>所以，可以一个个位数循环。献上代码：</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+char a[6];
+int l;
+int main()
+{
+	cin&gt;&gt;a;
+	l=strlen(a);
+	for(int i=0;i&lt;l;i++)
+	{
+		if(i!=l-2)
+		{
+		if(a[i]=='0'&amp;&amp;a[i+1]=='0') continue;//如果本身与后一个都为0，直接跳过
+		if(a[i]=='0'&amp;&amp;i!=l-1&amp;&amp;a[i+1]!='0') //如果本身是0而下一位不是0才能输出！
+		{
+			cout&lt;&lt;&quot;and &quot;;
+			continue;
+		}
+		if(a[i]=='1') cout&lt;&lt;&quot;one &quot;;//打表，输出
+		if(a[i]=='2') cout&lt;&lt;&quot;two &quot;;
+		if(a[i]=='3') cout&lt;&lt;&quot;three &quot;;
+		if(a[i]=='4') cout&lt;&lt;&quot;four &quot;;
+		if(a[i]=='5') cout&lt;&lt;&quot;five &quot;;
+		if(a[i]=='6') cout&lt;&lt;&quot;six &quot;;
+		if(a[i]=='7') cout&lt;&lt;&quot;seven &quot;;
+		if(a[i]=='8') cout&lt;&lt;&quot;eight &quot;;
+		if(a[i]=='9') cout&lt;&lt;&quot;nine &quot;;
+		}//这里判断位数
+		if(l==4&amp;&amp;i==0) cout&lt;&lt;&quot;thousand &quot;;
+		if(l==3&amp;&amp;i==0||l==4&amp;&amp;i==1) cout&lt;&lt;&quot;hundred &quot;;
+		if(l==2&amp;&amp;i==0||l==3&amp;&amp;i==1||l==4&amp;&amp;i==2)
+		{
+			if(a[i]=='0'&amp;&amp;a[i+1]=='0') continue;
+			if(a[i]=='0'&amp;&amp;a[i+1]!='0') 
+			{
+				cout&lt;&lt;&quot;and &quot;;
+				continue;
+			}
+				if(a[i]=='1')
+			{
+				if(a[i+1]=='0') 
+				{
+					cout&lt;&lt;&quot;and &quot;;
+					continue;
+				}//暴力枚举十位（最麻烦的）
+				if(a[i+1]=='1') cout&lt;&lt;&quot;eleven &quot;;
+				if(a[i+1]=='2') cout&lt;&lt;&quot;twelve &quot;;
+				if(a[i+1]=='3') cout&lt;&lt;&quot;thirteen &quot;;
+				if(a[i+1]=='4') cout&lt;&lt;&quot;fourteen &quot;;
+				if(a[i+1]=='5') cout&lt;&lt;&quot;fifteen &quot;;
+				if(a[i+1]=='6') cout&lt;&lt;&quot;sixteen &quot;;
+				if(a[i+1]=='7') cout&lt;&lt;&quot;seventeen &quot;;
+				if(a[i+1]=='8') cout&lt;&lt;&quot;eighteen &quot;;
+				if(a[i+1]=='9') cout&lt;&lt;&quot;nineteen &quot;;
+				break;
+			}
+			if(a[i]=='2') cout&lt;&lt;&quot;twenty &quot;;
+			if(a[i]=='3') cout&lt;&lt;&quot;thirty &quot;;
+			if(a[i]=='4') cout&lt;&lt;&quot;forty &quot;;
+			if(a[i]=='5') cout&lt;&lt;&quot;firty &quot;;
+			if(a[i]=='6') cout&lt;&lt;&quot;sixty &quot;;
+			if(a[i]=='7') cout&lt;&lt;&quot;seventy &quot;;
+			if(a[i]=='8') cout&lt;&lt;&quot;eighty &quot;;
+			if(a[i]=='9') cout&lt;&lt;&quot;ninety &quot;;
+		}
+	}
+	if(strcmp(a,&quot;0&quot;)==0) cout&lt;&lt;&quot;zero&quot;;//千万不要忘记特判！
+	return 0;
+}
+</code></pre>
+<p>最后补充一句：<code>if(strcmp(a,&quot;0&quot;)==0) cout&lt;&lt;&quot;zero&quot;;</code>也可以写成<code>if(a[0]=='0'&amp;&amp;strlen(a)==1) cout&lt;&lt;&quot;zero&quot;;</code>但由于是char，所以千万不能直接a==&quot;0&quot;!</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[题解 AT957 【何しちゃおっかな？】]]></title>
+        <id>https://Wowing.github.io/post/ti-jie-at957-he-sitiyaotukana/</id>
+        <link href="https://Wowing.github.io/post/ti-jie-at957-he-sitiyaotukana/">
+        </link>
+        <updated>2020-11-21T12:21:10.000Z</updated>
+        <content type="html"><![CDATA[<p><strong>注意：题目中写得为“两种图形各至少一个”！</strong></p>
+<p>首先，观察这两种方块，可以非常清楚地发现，如果只用<strong>一种L型</strong>构造，最小的长方形为2*4的矩形。即为：</p>
+<p>所以，可以看出来，如果拼成，面积就一定是8的倍数！</p>
+<p>然而，还有几个例外：如果一条边为1的话，显然是拼不成的；且2*4的矩形使用的是一种L型，所以也不行！也就是说，只要面积是8的倍数，且a与b的最小公倍数不等于8就可以啦！只要添加这里的判断，恭喜你，可以愉快地AC啦！</p>
+<p>代码：</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int t,a,b;
+int main()
+{
+    cin&gt;&gt;t;
+    while(t--)
+    {
+        cin&gt;&gt;a&gt;&gt;b；//防止抄袭
+        if(a*b%8!=0||a==1||b==1||a==2&amp;&amp;b==4||a==4&amp;&amp;b==2) cout&lt;&lt;&quot;Impossible&quot;；//防抄++
+        else cout&lt;&lt;&quot;Possible&quot;;
+        cout&lt;&lt;endl;
+    }
+    //system(&quot;pause&quot;);
+    return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[题解 AT4142 【[ARC098B] Xor Sum 2】]]></title>
+        <id>https://Wowing.github.io/post/ti-jie-at4142-arc098b-xor-sum-2/</id>
+        <link href="https://Wowing.github.io/post/ti-jie-at4142-arc098b-xor-sum-2/">
+        </link>
+        <updated>2020-11-21T12:20:33.000Z</updated>
+        <content type="html"><![CDATA[<p>一道较简单的题目。</p>
+<h3 id="题意">题意</h3>
+<p>给你一些数字，求有多少区间的异或和等于区间的数字之和。</p>
+<h3 id="题解">题解</h3>
+<p>如果直接枚举的话，时间复杂度略高。怎么办呢？可以用两指针，一个指针固定，一个指针滑动。而后，就可以找到最大满足条件的端点了。</p>
+<p>代码：</p>
+<pre><code class="language-cpp">#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+using namespace std;
+const int N=200020;
+long long s,n,a[N],ans=0;
+int main()
+{
+	cin&gt;&gt;n;
+	//memset(last,0,sizeof(last));
+	for(int i=1;i&lt;=n;i++) cin&gt;&gt;a[i];
+	long long j=0;
+	long long suma=0,sumb=0;
+	for(int i=1;i&lt;=n;i++)
+	{
+		while(j+1&lt;=n&amp;&amp;sumb+a[j+1]==(suma^a[j+1]))//指针滑动
+		{
+			suma^=a[j+1];
+			sumb+=a[j+1];
+			j++;
+		}
+		ans+=j-i+1;
+		suma^=a[i];
+		sumb-=a[i];
+	}
+	cout&lt;&lt;ans;
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[题解 UVA1193 【Radar Installation】]]></title>
+        <id>https://Wowing.github.io/post/ti-jie-uva1193-radar-installation/</id>
+        <link href="https://Wowing.github.io/post/ti-jie-uva1193-radar-installation/">
+        </link>
+        <updated>2020-11-21T12:18:07.000Z</updated>
+        <content type="html"><![CDATA[<p>是一道比较简单的贪心，主要是对公式的运用。</p>
+<h3 id="题意">题意</h3>
+<p>多组测试数据。</p>
+<p>给你n个坐标上的点, n &lt;= 1000。</p>
+<p>你可以在x轴上放置雷达,每个雷达的辐射半径都是d。</p>
+<p>现在问你辐射到所有的点至少需要几个雷达,如果辐射不到所有的点输出-1。</p>
+<h3 id="题解">题解</h3>
+<p>因为二维的贪心比较困难，所以我们使用圆形的公式即可。用公式转化后，就变成了一道覆盖区间的普通贪心。</p>
+<h3 id="代码">代码</h3>
+<pre><code class="language-cpp">#include&lt;iostream&gt;
+#include&lt;cmath&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstdio&gt;
+#define eps 0.0000005
+using namespace std;
+struct note 
+{
+	double x;
+	double y;
+}a[30001];
+int n;
+double s;
+double l,r;
+int sum;
+bool cmp(note a,note b)
+{
+	return a.x&lt;b.x;
+}
+int main()
+{
+	cin&gt;&gt;n&gt;&gt;s;
+	while(n&amp;&amp;s)
+	{
+		int flag=0;
+		for(int i=0;i&lt;n;i++) 
+		{
+			cin&gt;&gt;l&gt;&gt;r;
+			if(abs(r)&gt;s) flag=1;
+			a[i].x=l-sqrt(s*s-r*r);
+			a[i].y=l+sqrt(s*s-r*r);//公式的运用
+		}
+		if(flag) //特判
+		{
+			cout&lt;&lt;&quot;Case &quot;&lt;&lt;++sum&lt;&lt;&quot;: -1&quot;&lt;&lt;endl;
+			for(int i=0;i&lt;n;i++) a[i].x=a[i].y=0.0;
+			scanf(&quot;\n%d %lf&quot;,&amp;n,&amp;s);
+			continue;
+		}
+		sort(a,a+n,cmp);//开始寻找
+		double right=a[0].y;
+		int ans=1;
+		for(int i=1;i&lt;n;i++)
+			if(a[i].x&lt;=right) right=min(right,a[i].y);
+			else right=a[i].y,ans++;
+		cout&lt;&lt;&quot;Case &quot;&lt;&lt;++sum&lt;&lt;&quot;: &quot;&lt;&lt;ans&lt;&lt;endl;
+		for(int i=0;i&lt;n;i++) a[i].x=a[i].y=0.0;
+		scanf(&quot;\n%d %lf&quot;,&amp;n,&amp;s);
+	}
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[题解 CF527C 【Glass Carving】]]></title>
+        <id>https://Wowing.github.io/post/ti-jie-cf527c-glass-carving/</id>
+        <link href="https://Wowing.github.io/post/ti-jie-cf527c-glass-carving/">
+        </link>
+        <updated>2020-11-21T12:17:05.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="题意">题意</h3>
+<p>有一个w*h的矩形,每次要么横着切一刀,要么竖着切一刀,每次你都要回答切完后最大的子矩形的面积。</p>
+<p>要么是横着在y位置切一刀,要么是竖着在x位置切一刀.</p>
+<h3 id="题解">题解</h3>
+<p>原来想着用暴力写，但是数据范围比较大：2 &lt;= w, h &lt;= 200000, 1 &lt;= n &lt;= 200000。然后就想到了STL。</p>
+<p>用两个multiset和两个set分别储存切的痕迹与原来的，面积就是最大的长和宽相乘。</p>
+<p>代码</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+#define its set&lt;int&gt;::iterator
+#define is mulitset&lt;int&gt;::iterator
+
+using namespace std;
+int w,h,n;
+multiset&lt;int&gt; sx;
+multiset&lt;int&gt; sy;
+set&lt;int&gt; x;
+set&lt;int&gt; y;
+int main(){
+
+    scanf(&quot;%d%d%d&quot;,&amp;w,&amp;h,&amp;n);
+    x.insert(0);
+    x.insert(h);
+    y.insert(w);
+    y.insert(0);
+    sx.insert(h);
+    sy.insert(w);
+    for(int i=1;i&lt;=n;++i)
+    {
+        char c;
+        int p;
+        cin&gt;&gt;c;
+        scanf(&quot;%d&quot;,&amp;p);
+
+        if(c=='V')
+        {
+            y.insert(p);
+            its it,itt;
+            it=y.lower_bound(p);
+            itt=y.upper_bound(p);
+            --it;
+
+            int ls,rs;
+            ls=p-*it;
+            rs=*itt-p;
+            int ss=*itt-*it;
+            //cout&lt;&lt;*itt&lt;&lt;&quot; &quot;&lt;&lt;*it&lt;&lt;&quot; &quot;&lt;&lt;ss&lt;&lt;endl;
+            sy.erase(sy.find(ss));
+            sy.insert(ls);
+            sy.insert(rs);
+        }
+        else
+        {
+            x.insert(p);
+            its it,itt;
+            it=x.lower_bound(p);
+            itt=x.upper_bound(p);
+            --it;
+
+            int ls,rs;
+            ls=p-*it;
+            rs=*itt-p;
+            int ss=*itt-*it;
+            //cout&lt;&lt;*itt&lt;&lt;&quot; &quot;&lt;&lt;*it&lt;&lt;&quot; &quot;&lt;&lt;ss&lt;&lt;endl;
+            sx.erase(sx.find(ss));
+            sx.insert(rs);
+            sx.insert(ls);
+
+        }
+        int a,b;
+        a=*(--sx.end());
+        b=*(--sy.end());
+        printf(&quot;%lld\n&quot;,(1LL)*a*b);
+    }
+
+    return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[题解 CF2B 【The least round way】]]></title>
+        <id>https://Wowing.github.io/post/ti-jie-cf2b-the-least-round-way/</id>
+        <link href="https://Wowing.github.io/post/ti-jie-cf2b-the-least-round-way/">
+        </link>
+        <updated>2020-11-21T12:15:56.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="题意">题意</h3>
+<p>在一个矩阵中做乘法，让结果的0最少。</p>
+<h3 id="题解">题解</h3>
+<p>因为是矩阵乘法，0是2与5构成的，只要判断有几个2和5就可以。很容易想到使用dp。</p>
+<h3 id="代码">代码</h3>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+const int N=1001;
+int x,n;
+int dp[N][N][2];
+int main()
+{
+	ios::sync_with_stdio(false);
+	cin&gt;&gt;n;
+	int pos=-1;
+	for(int i=1;i&lt;=n;i++)
+	{
+		for(int j=1;j&lt;=n;j++)
+		{
+			cin&gt;&gt;x;
+			if(x==0)
+			{
+				pos=i;
+				continue;
+			}
+			int t=x;
+			while(t%2==0) 
+			{
+				dp[i][j][0]++;
+				t/=2;	
+			}
+			t=x;
+			while(t%5==0) 
+			{
+				dp[i][j][1]++;
+				t/=5;	
+			}
+		}
+	}
+	for(int i=2;i&lt;=n;i++)
+	{
+		dp[i][1][0]+=dp[i-1][1][0];
+		dp[i][1][1]+=dp[i-1][1][1];//初始化
+		dp[1][i][0]+=dp[1][i-1][0];
+		dp[1][i][1]+=dp[1][i-1][1];
+	}	
+	for(int i=2;i&lt;=n;i++)
+	{
+		for(int j=2;j&lt;=n;j++)
+		{
+			dp[i][j][0]+=min(dp[i-1][j][0],dp[i][j-1][0]);
+			dp[i][j][1]+=min(dp[i-1][j][1],dp[i][j-1][1]);
+		}//开始dp
+	}
+	string ans;//string可以更方便操作
+	int k=0;
+	if(dp[n][n][0]&gt;dp[n][n][1]) k=1;
+	if(pos!=-1&amp;&amp;dp[n][n][k]&gt;0)//特判
+	{
+		cout&lt;&lt;1&lt;&lt;endl;
+		for(int i=1;i&lt;pos;i++) cout&lt;&lt;&quot;D&quot;;
+		for(int i=1;i&lt;n;i++) cout&lt;&lt;&quot;R&quot;;
+		for(int i=pos;i&lt;n;i++) cout&lt;&lt;&quot;D&quot;;
+		return 0; 
+	}
+	int i=n,j=n;
+	while(true)
+	{
+		if(dp[i-1][j][k]&lt;dp[i][j-1][k])
+		{
+			i--;
+			ans+=&quot;D&quot;;
+		}
+		else
+		{
+			j--;
+			ans+=&quot;R&quot;;
+		}
+		if(i==1) 
+		{
+			for(int l=1;l&lt;j;l++) ans+=&quot;R&quot;;
+			break; 
+		}
+		if(j==1)
+		{
+			for(int l=1;l&lt;i;l++) ans+=&quot;D&quot;;
+			break; 
+		}
+	}
+	cout&lt;&lt;dp[n][n][k]&lt;&lt;endl;
+	for(int i=ans.size()-1;i&gt;=0;i--) cout&lt;&lt;ans[i];
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[题解 CF543A 【Writing Code】]]></title>
         <id>https://Wowing.github.io/post/ti-jie-cf543a-writing-code/</id>
@@ -159,433 +710,6 @@ int main()
 	return 0;
 }
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[题解 UVA1723 【Intervals】]]></title>
-        <id>https://Wowing.github.io/post/ti-jie-uva1723-intervals/</id>
-        <link href="https://Wowing.github.io/post/ti-jie-uva1723-intervals/">
-        </link>
-        <updated>2020-11-21T12:07:55.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="题意">题意</h3>
-<p>有n个如下形式的条件:</p>
-<p>ai bi ci,表示在区间[ai, bi]内至少要选择ci个整数点。</p>
-<p>问你满足n个条件的情况下,最少需要选多少个点?</p>
-<h3 id="题解">题解</h3>
-<p>就差分约束呗......</p>
-<p>何为差分约束:如果一个系统由n个变量和m个约束条件组成，形成m个形如ai-aj≤k的不等式(i,j∈[1,n],k为常数),则称其为差分约束系统。</p>
-<p>由此，可以把它转化为图，跑一波SPFA就完事了。</p>
-<h3 id="代码">代码</h3>
-<pre><code class="language-cpp">#include&lt;stdio.h&gt;
-#include&lt;string.h&gt;
-#include&lt;algorithm&gt;
-#include&lt;stack&gt;
-#include&lt;iostream&gt;
-using namespace std;
-struct node
-{
-    int u,v,w;
-    int next;
-}wee[500001];
-int minnnn=0x7f,maxxxx=-1;//最小和最大
-int n,h[500001],cnt;
-int u,v,w;
-int vis[500001],stackto[500001],qwq[500001];
-void add(int u,int v,int w)
-{
-    wee[++cnt].u=u;
-    wee[cnt].v=v;
-    wee[cnt].w=w;
-    wee[cnt].next=h[u];
-    h[u]=cnt;
-}
-bool spfa()
-{
-    stack&lt;int&gt;st;
-    while(!st.empty()) st.pop();
-    memset(stackto,0,sizeof(stackto));
-    memset(qwq,0,sizeof(qwq));
-    for(int i=minnnn;i&lt;=maxxxx;i++)
-        vis[i]=-0x7f;
-    st.push(minnnn);
-    vis[minnnn]=0;
-    stackto[minnnn]=1;
-    qwq[minnnn]++;
-    while(!st.empty())
-    {
-        int u=st.top();
-        st.pop();
-        stackto[u]=0;
-        for(int i=h[u];i!=0;i=wee[i].next)
-        {
-            if(vis[wee[i].v]&lt;vis[u]+wee[i].w)
-            {
-                vis[wee[i].v]=vis[u]+wee[i].w;
-                if(!stackto[wee[i].v])
-                {
-                    stackto[wee[i].v]=1;
-                    st.push(wee[i].v);
-                    qwq[wee[i].v]++;
-                    if(qwq[wee[i].v]&gt;n)
-                        return false;
-                }
-            }
-        }
-    }
-    return true;
-}
-
-int main()
-{
-    cin&gt;&gt;n;
-    for(int i=0;i&lt;n;i++)
-    {
-        cin&gt;&gt;u&gt;&gt;v&gt;&gt;w;
-        add(u,v+1,w);
-        minnnn=min(minnnn,u);
-        maxxxx=max(maxxxx,v+1);
-    }
-    for(int i=minnnn;i&lt;maxxxx;i++)
-    {
-        add(i,i+1,0);
-        add(i+1,i,-1);
-    }
-    spfa();//万能的spfa
-    cout&lt;&lt;vis[maxxxx]-vis[minnnn]&lt;&lt;endl;
-    return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[题解 AT3875 【[ARC089A] Traveling】]]></title>
-        <id>https://Wowing.github.io/post/ti-jie-at3875-arc089a-traveling/</id>
-        <link href="https://Wowing.github.io/post/ti-jie-at3875-arc089a-traveling/">
-        </link>
-        <updated>2020-04-05T11:22:16.000Z</updated>
-        <content type="html"><![CDATA[<p>有生之年居然能够入门题WA，果然我太菜了</p>
-<p>好，进入正题：</p>
-<p>一开始我看到这样的题目，第一反应就是万能的dfs！</p>
-<p>思路：搜索路线，由于求最短时间所以可以直接剪枝向左和向上。而求出最短时间比较即可。</p>
-<p>代码分数：0</p>
-<p>代码：</p>
-<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-int n,m,a[41][101],t,fl;
-int flag=0;
-//bool f[41][41];
-int minn=1e9;
-void dfs(int x,int y,int sum)//dfs
-{
-    if(x&lt;1||x&gt;n||y&lt;1||y&gt;m) return;
-    if(x==n&amp;&amp;y==m) minn=min(minn,sum);
-    dfs(x+1,y,sum+1);
-    dfs(x,y+1,sum+1);
-}
-int main()
-{
-	//ios::sync_with_stdio(false);
-	int i,j;
-	cin&gt;&gt;t;
-    while(t--)
-    {
-        minn=1e9;
-        cin&gt;&gt;fl&gt;&gt;n&gt;&gt;m;
-        dfs(1,1,0);
-        if(minn&gt;fl||minn==0) flag=1;
-        //cout&lt;&lt;minn&lt;&lt;&quot; &quot;&lt;&lt;flag&lt;&lt;endl;
-        //else cout&lt;&lt;&quot;No&quot;;
-        //cout&lt;&lt;endl;
-    }
-    if(flag) cout&lt;&lt;&quot;No&quot;;
-    else cout&lt;&lt;&quot;Yes&quot;;
-	//dfs(1,1,a[1][1]);
-	//cout&lt;&lt;maxx;
-    //system(&quot;pause&quot;);
-	return 0;
-}
-</code></pre>
-<p>反思原因：求的是时间t时能否<strong>到达</strong>，而不是在时间t之前能否到达。</p>
-<p>所以让我们再回过头来看看这道题，可以明显地发现其实所需时间就是x+y嘛！等等，还没完：时间大小判断了，那怎么知道t的时候到底能不能到达目的地呢？</p>
-<p>经过模拟，可以清楚地发现：如果你要在t时间到达的话，最短时间到目的地后，可以<strong>不停地往回走一格再走回来，往回走一格再走回来......</strong></p>
-<p>所以，可以发现，只要剩余的时间mod2余数为0的时候，结果就一定能够到达！</p>
-<p>代码：</p>
-<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-int n,m,t,fl;
-int flag=0;
-//bool f[41][41];
-int minn=1e9;
-void dfs(int x,int y,int sum)
-{
-    if(sum&gt;minn) return;
-    if(x&lt;1||x&gt;n||y&lt;1||y&gt;m) return;
-    if(x==n&amp;&amp;y==m) minn=min(minn,sum);
-    dfs(x+1,y,sum+1);
-    dfs(x,y+1,sum+1);
-}
-int main()
-{
-	//ios::sync_with_stdio(false);
-	int i,j;
-	cin&gt;&gt;t;
-    while(t--)
-    {
-        cin&gt;&gt;fl&gt;&gt;n&gt;&gt;m;
-        if(n+m&gt;fl) //时间太短，原地升天
-        {
-            flag=1;
-            break;
-        }
-        if((fl-n-m)%2==1) //走了不回，原地升天
-        {
-            flag=1;
-            break;//只要不行，直接走也
-        }
-    }
-    if(flag) cout&lt;&lt;&quot;No&quot;;
-    else cout&lt;&lt;&quot;Yes&quot;;
-	//dfs(1,1,a[1][1]);
-	//cout&lt;&lt;maxx;
-    //system(&quot;pause&quot;);
-	retun 0; //防止抄袭，抵抗之间
-}
-</code></pre>
-<p>完结撒花~</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[题解 CF441A 【Valera and Antique Items】]]></title>
-        <id>https://Wowing.github.io/post/ti-jie-cf441a-valera-and-antique-items/</id>
-        <link href="https://Wowing.github.io/post/ti-jie-cf441a-valera-and-antique-items/">
-        </link>
-        <updated>2020-03-05T04:35:18.000Z</updated>
-        <content type="html"><![CDATA[<p>RE了好久，结果发现是<code>system(&quot;pause&quot;);</code>的错误。</p>
-<p>首先，看到这道题目，可能很多萌新和我一样是一脸茫然的。“这不是背包/动规吗？怎么成入门题了呢？”</p>
-<p>先别急，仔细看题目后，我们可以把题目概括成这样：</p>
-<p>有n组数，第i个组数有ki个数字。只要你的数字高于第i个数，这一组数字就属于你了。问你能得到几组数字？分别是第几组？</p>
-<p>这样就简单很多了吧......</p>
-<p>只要这个数组的数有一个小于你的数，就可以把ai标记为1。最后输出ans即可。</p>
-<p>上代码：</p>
-<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-int n,an,x,nx,ans;
-int a[51];
-int main()
-{
-    cin&gt;&gt;n&gt;&gt;an;
-    for(int i=1;i&lt;=n;i++)
-    {
-        cin&gt;&gt;nx;//输入个数
-        for(int j=1;j&lt;=nx;j++)
-        {
-            cin&gt;&gt;x;
-            if(x&lt;an) a[i]=1;//桶排序
-        }
-        if(a[i]==1) ans++;//如果有的话，ans++
-    }
-    cout&lt;&lt;ans&lt;&lt;endl;
-    for(int i=1;i&lt;=n;i++) if(a[i]==1) cout&lt;&lt;i&lt;&lt;&quot; &quot;;
-    //system(&quot;pause&quot;);
-    return 0;
-}
-</code></pre>
-<p>值得一提的是：ans是<strong>你得到的数组数量</strong>，而不是你能得到的数字的数量。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[题解 AT3881 【[ARC090A] Candies】]]></title>
-        <id>https://Wowing.github.io/post/ti-jie-at3881-arc090a-candies/</id>
-        <link href="https://Wowing.github.io/post/ti-jie-at3881-arc090a-candies/">
-        </link>
-        <updated>2020-03-05T02:09:39.000Z</updated>
-        <content type="html"><![CDATA[<p>看到dalao们都用DP写这道题，萌新不得不弱弱地发声：“这难道不是一道DFS题吗？”</p>
-<p>实际上，我认为这道题目就是赤裸裸的深度优先搜索！唯一要注意的是n为0的时候的特判。</p>
-<p>code:</p>
-<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-int n,m,a[41][101];
-//bool f[41][41];
-int maxx;
-void dfs(int x,int y,int sum)
-{
-    if(x&lt;1||x&gt;2||y&lt;1||y&gt;n) return;
-    if(x==2&amp;&amp;y==n) maxx=max(maxx,sum);//maxx取最大值
-    if(x&lt;2) dfs(x+1,y,sum+a[x+1][y]);//搜索
-    dfs(x,y+1,sum+a[x][y+1]);
-}
-int main()
-{
-	//ios::sync_with_stdio(false);
-	int i,j;
-	cin&gt;&gt;n;
-	for(i=1;i&lt;=2;i++)
-	{
-		for(j=1;j&lt;=n;j++)
-		{
-			cin&gt;&gt;a[i][j];
-		}
-	}
-	dfs(1,1,a[1][1]);
-	cout&lt;&lt;maxx;//输出
-    //system(&quot;pause&quot;);
-	return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[题解 AT3919 【[ABC088B] Card Game for Two】]]></title>
-        <id>https://Wowing.github.io/post/ti-jie-at3919-abc088b-card-game-for-two/</id>
-        <link href="https://Wowing.github.io/post/ti-jie-at3919-abc088b-card-game-for-two/">
-        </link>
-        <updated>2020-03-05T02:08:50.000Z</updated>
-        <content type="html"><![CDATA[<p>萌新的奇怪思路：</p>
-<ul>
-<li>
-<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> mod 2=0:每一次都用奇数项减去偶数项，再加入<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mi>n</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">ans</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span></span></span></span>。</p>
-</li>
-<li>
-<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> mod 2=1:由于最后一张卡牌肯定是先手的，所以直接把最后一个数加入<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mi>n</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">ans</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span></span></span></span>，然后<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>。</p>
-</li>
-</ul>
-<p>代码：</p>
-<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-int a[101],n,ans;
-int cmp(int a,int b)
-{
-    return a&gt;b;
-}
-int main()
-{
-    cin&gt;&gt;n;
-    for(int i=1;i&lt;=n;i++) cin&gt;&gt;a[i];
-    sort(a+1,a+1+n,cmp);
-    if(n%2==1)//直接判断
-    {
-        n-=1;
-        ans+=a[n+1];
-    }
-    for(int i=1;i&lt;=n;i+=2)//两个一起
-    {
-        ans+=a[i]-a[i+1];
-    }
-    cout&lt;&lt;ans;
-    //system(&quot;pause&quot;);
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[对于我来说，如何更快地A掉题目]]></title>
-        <id>https://Wowing.github.io/post/dui-yu-wo-lai-shuo-ru-he-geng-kuai-di-a-diao-ti-mu/</id>
-        <link href="https://Wowing.github.io/post/dui-yu-wo-lai-shuo-ru-he-geng-kuai-di-a-diao-ti-mu/">
-        </link>
-        <updated>2020-03-05T02:08:04.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="对于我来说如何更快地骗分a掉题目">对于我来说，如何更快地<s>骗分</s>A掉题目</h1>
-<p>这是关于一个蒟蒻的经验，请各位多多指教！</p>
-<h2 id="1说明">1.说明</h2>
-<p>大部分题目都有说明。这里以<a href="https://wzoi.cc/s/1/2464">小X分砖块</a>为例。在提示（说明）中可以看见这样的说明：</p>
-<ul>
-<li>对于 30%的数据，N=1。</li>
-<li>对于 60%的数据，所有 Ki均相等。</li>
-<li>对于 100%的数据， 1≤N≤100000， 1≤Ki≤1000000000， 砖的总块数不超过 1000000000。</li>
-</ul>
-<p>然后，我惊讶地发现：我不会写这道题。于是，说明就有用了！</p>
-<ul>
-<li>对于 30%的数据，N=1。<br>
-在N=1的情况下，说明只有一段，那么就特判输出砖块总数量就可以了。</li>
-</ul>
-<p>代码如下：</p>
-<pre><code class="language-cpp">	if(n==1)
-    {
-    	int ttt;
-        cin&gt;&gt;ans&gt;&gt;ttt;
-        printf(&quot;%d&quot;,ans);
-        return 0;
-    }
-    
-</code></pre>
-<p>然后，就这样，轻松得了30分。<br>
-<a href="https://wzoi.cc/solutions/964078">地址</a></p>
-<p>虽然没有满分，但是30分总比0分好吧......</p>
-<p>总之，数据是个好东西！</p>
-<h2 id="2你谷评论区">2.你谷评论区</h2>
-<p>在你谷评论区，总能找到一些神奇的东西。如<a href="https://www.luogu.org/problemnew/show/P1547">P1547 Out of Hay</a></p>
-<p>在一开始写这题的时候，只是直接用最小生成树的。然而，在习惯性地点开评论区后.......</p>
-<figure data-type="image" tabindex="1"><img src="https://cdn.luogu.com.cn/upload/pic/56159.png" alt="RT" loading="lazy"></figure>
-<p>然后就把P1111加上了这位dalao的判断，然后完美AC！؏؏☝ᖗ乛◡乛ᖘ☝؏؏</p>
-<p><a href="https://www.luogu.org/recordnew/show/17960629">地址</a></p>
-<p>总之，评论区会有惊喜！（当然，有直接代码也不能抄哦！）</p>
-<h2 id="3打表">3.打表</h2>
-<p>这个就不用说了吧.......</p>
-<p><a href="https://www.luogu.org/problemnew/show/CF409F">CF409F 000001</a>，自己体会。</p>
-<h2 id="小结">小结</h2>
-<p>打表加暴力，</p>
-<p>骗分过样例。</p>
-<p>暴力出奇迹，</p>
-<p>打表出省一。</p>
-<p>第一次写文章写得不好请多关照！</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[大事祭]]></title>
-        <id>https://Wowing.github.io/post/da-shi-ji/</id>
-        <link href="https://Wowing.github.io/post/da-shi-ji/">
-        </link>
-        <updated>2020-03-04T09:55:52.000Z</updated>
-        <content type="html"><![CDATA[<p>2018-03-24 10:13</p>
-<p>欢迎注册洛谷。希望洛谷可以给你带来进步。如果有任何疑问可以查看帮助，也可以直接在讨论区发帖。祝你在洛谷coding愉快！</p>
-<p>2018-04-07 13:05</p>
-<p>成为了小小牛。以后还要继续努力!</p>
-<p>2018-07-18 21:58</p>
-<p>成为了小小犇。以后还要继续努力!</p>
-<p>2018-08-17 08:36</p>
-<p>成为了小牛。以后还要继续努力!</p>
-<p>2018-09-17 19:32</p>
-<p>成为了小犇。以后还要继续努力!</p>
-<p>2018-12-31 11:55</p>
-<p>成为了中牛。以后还要继续努力!</p>
-<p>2019-01-28 11:08</p>
-<p>成为了中犇。以后还要继续努力!</p>
-<p>2019-01-31 10:11:51</p>
-<p>提交200祭（QAQ）</p>
-<p>2019-02-15 12:35:14</p>
-<h4 id="绿名祭">绿名祭</h4>
-<p>2019-03-03 18:44:24</p>
-<p>AC70祭</p>
-<p>2019-03-06 20:38:41</p>
-<h4 id="又掉蓝2333祭">又掉蓝2333祭</h4>
-<p>2019-03-08 18:03</p>
-<p>成为了大牛。以后还要继续努力!</p>
-<p>2019-03-12 19:57:09</p>
-<p>AC80祭（QAQ我真是个蒟蒻）</p>
-<p>2019-03-31 20:26:11</p>
-<p>愚人节比赛爆0祭</p>
-<p>AC95祭</p>
-<p>2019-04-14 19:28:05</p>
-<p>终于，AC100祭！（果然是个蒟蒻）</p>
-<p>2019-04-16 19:02:59</p>
-<h4 id="我橙名了橙名祭莫名其妙地橙名了">我！！！！！！橙名了！！！！！！！橙名祭！（莫名其妙地橙名了）</h4>
-<p>2019-04-30 16:40:04</p>
-<h4 id="莫名其妙又蓝了蓝名祭">莫名其妙又蓝了？？？蓝名祭</h4>
-<p>2019-06-22 14:34</p>
-<p>成为了大犇。以后还要继续努力!</p>
-<p>2019-07-09 21:14:11</p>
-<p>通过11^2题祭</p>
-<p>2019-07-17 16:18:17</p>
-<h4 id="wtf绿名祭">WTF绿名祭</h4>
-<p>2019-08-14 20:40:47</p>
-<h4 id="蓝了蓝名祭一秒钟前还是绿的">蓝了？？？蓝名祭？？？一秒钟前还是绿的</h4>
-<p>2020-2-6 10:34:51</p>
-<h4 id="人生中的第一道黑题-这里">人生中的第一道黑题！ <a href="https://www.luogu.com.cn/record/30189379">这里！</a></h4>
-<p>2020-03-04 16:54:07</p>
-<p>题解5篇祭</p>
-<p>2020-03-09 00:00:00</p>
-<h4 id="理所当然的绿名祭">理所当然的绿名祭</h4>
-<p>2020-04-05 18:57:29</p>
-<p>AC200祭+提交600祭，wtcl</p>
 ]]></content>
     </entry>
 </feed>
