@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Wowing.github.io</id>
     <title>Arcadia</title>
-    <updated>2020-11-21T11:43:18.482Z</updated>
+    <updated>2020-11-21T12:15:20.026Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Wowing.github.io"/>
     <link rel="self" href="https://Wowing.github.io/atom.xml"/>
@@ -11,13 +11,250 @@
     <icon>https://Wowing.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Arcadia</rights>
     <entry>
-        <title type="html"><![CDATA[琪露诺到底有多可爱]]></title>
-        <id>https://Wowing.github.io/post/wo-tm-jiu-shi-yi-ge-zhi-zhang/</id>
-        <link href="https://Wowing.github.io/post/wo-tm-jiu-shi-yi-ge-zhi-zhang/">
+        <title type="html"><![CDATA[题解 CF543A 【Writing Code】]]></title>
+        <id>https://Wowing.github.io/post/ti-jie-cf543a-writing-code/</id>
+        <link href="https://Wowing.github.io/post/ti-jie-cf543a-writing-code/">
         </link>
-        <updated>2020-04-05T11:23:44.000Z</updated>
-        <content type="html"><![CDATA[<p><a href="https://www.bilibili.com/video/BV1Wx411c7wk?from=search&amp;seid=9619809845201168305">琪露诺她多可爱啊</a></p>
-<p><a href="https://www.bilibili.com/video/BV14E411E78K?from=search&amp;seid=11098846610488603117">琪露诺她多聪明（bendan）啊</a></p>
+        <updated>2020-11-21T12:14:36.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="题意">题意</h3>
+<p>如果任务的所有书面行最多包含b错误，那么让我们将计划称为好的。你的任务是确定有多少不同的好计划。由于计划的数量可能很大，打印其余的这个数字模给定正整数模。</p>
+<h3 id="解析">解析</h3>
+<p>比较水的背包，将每一个程序员的代码都看成是不同的物品，求总质量。不过要记得初始化。</p>
+<h3 id="代码">代码</h3>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+const int N=1001;
+int n,m,b,mod;
+int a[N],dp[N][N];
+int main()
+{
+	ios::sync_with_stdio(false);
+	cin&gt;&gt;n&gt;&gt;m&gt;&gt;b&gt;&gt;mod;
+	for(int i=1;i&lt;=n;i++) cin&gt;&gt;a[i];
+	for(int i=0;i&lt;=b;i++) dp[0][i]=1;
+	for(int i=1;i&lt;=n;i++)
+		for(int j=1;j&lt;=m;j++)
+			for(int k=a[i];k&lt;=b;k++)
+				dp[j][k]=(dp[j][k]+dp[j-1][k-a[i]])%mod;
+	cout&lt;&lt;dp[m][b];
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[题解 P6140 【[USACO07NOV]Best Cow Line S】]]></title>
+        <id>https://Wowing.github.io/post/ti-jie-p6140-usaco07novbest-cow-line-s/</id>
+        <link href="https://Wowing.github.io/post/ti-jie-p6140-usaco07novbest-cow-line-s/">
+        </link>
+        <updated>2020-11-21T12:13:27.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="题意">题意</h3>
+<p>多组测试数据。</p>
+<p>给你一个长度为N的字符串S,输入格式是依次输入N个字符。</p>
+<p>N &lt;= 2000。</p>
+<p>每次你可以从S的开头或者结尾取出一个字符,放到一个T字符串的尾部。</p>
+<p>输出字典序最小的T字符串,<strong>每80个字符换一行输出。</strong></p>
+<h3 id="题解">题解</h3>
+<p>不难，直接循环即可。但是输出略微毒瘤。</p>
+<p>我们可以把情况分为两种：</p>
+<p>两边字符不一样——直接把字典序小的拿出。</p>
+<p>两边字符一样——继续寻找，找到不一样的，然后把字典序小的一边先拿出。</p>
+<h3 id="代码">代码</h3>
+<pre><code class="language-cpp">#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+using namespace std;
+int n;
+int suml,sumr,sum;
+char a[30001],ans[30001];
+int main()
+{
+	cin&gt;&gt;n;
+	for(int i=0;i&lt;n;i++) cin&gt;&gt;a[i];
+	while(strlen(a)!=strlen(ans))
+	{
+		int l,r;
+		r=strlen(a)-1-sumr;
+		l=suml;
+		while(l&lt;r&amp;&amp;a[l]==a[r]) l++,r--;
+		if(a[l]&gt;a[r]) //第一种情况
+        sumr++,ans[strlen(ans)]=a[strlen(a)-sumr];
+		else suml++,ans[strlen(ans)]=a[suml-1];//否则，判断
+	}
+	for(int i=0;i&lt;strlen(ans);i++)
+	{
+		cout&lt;&lt;ans[i];
+		sum++;
+		if(sum==80) sum=0,cout&lt;&lt;endl;//输出判断
+	}
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[题解 SP1684 【FREQUENT - Frequent values】]]></title>
+        <id>https://Wowing.github.io/post/ti-jie-sp1684-frequent-frequent-values/</id>
+        <link href="https://Wowing.github.io/post/ti-jie-sp1684-frequent-frequent-values/">
+        </link>
+        <updated>2020-11-21T12:10:38.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="题意">题意</h3>
+<p>多组测试数据。</p>
+<p>给你n个数, 以非递减的顺序给出。</p>
+<p>再给你q个询问,</p>
+<p>每个询问给你两个数a b。</p>
+<p>查询a b区间内的众数的出现次数。</p>
+<h3 id="题解">题解</h3>
+<p>给大家介绍一种比较简单的方法——使用st表。</p>
+<p>st表用于区间最值查询（RMQ），是运用于<strong>静态区间</strong>的求最值。st表的方法非常简单，先预处理然后查询，就好了。其实st表就是一种另类的dp。</p>
+<h3 id="代码">代码</h3>
+<pre><code class="language-cpp">#include&lt;iostream&gt;
+#include&lt;cmath&gt;
+#include&lt;cstring&gt;
+using namespace std;
+int n,m,ans;
+int a[100001];
+int dp[100001][26];
+int mp[100001];
+void sst()//st表
+{
+	for(int i=1;i&lt;=n;i++) dp[i][0]=mp[i];
+	int dd=(int)(log((double)(n+1))/log(2.0));
+	for(int i=1;i&lt;=dd;i++)
+		for(int j=1;j+(1&lt;&lt;i)-1&lt;=n;j++)
+			dp[j][i]=max(dp[j][i-1],dp[j+(1&lt;&lt;(i-1))][i-1]);
+}
+int ask(int x,int y)
+{
+	if(x&gt;y)return 0;
+    int k=(int)(log((double)(y-x+1))/log(2.0));
+    return max(dp[x][k],dp[y-(1&lt;&lt;k)+1][k]);
+}
+int main()
+{
+	ios::sync_with_stdio(false);
+	while(1)
+	{
+		cin&gt;&gt;n;
+		if(n==0) return 0;
+		cin&gt;&gt;m;
+		mp[1]=1;
+		for(int i=1;i&lt;=n;i++) 
+		{
+			cin&gt;&gt;a[i];
+			if(i&gt;1) 
+			{
+				if(a[i]==a[i-1]) mp[i]=mp[i-1]+1;
+				else mp[i]=1;
+			}
+		}
+		sst();
+		while(m--)
+		{
+			int x,y;
+			cin&gt;&gt;x&gt;&gt;y;
+			int now=x;
+            while(now&lt;=y&amp;&amp;a[now]==a[now-1])now++;
+            cout&lt;&lt;max(now-x,ask(now,y))&lt;&lt;endl;
+		} 
+	}
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[题解 UVA1723 【Intervals】]]></title>
+        <id>https://Wowing.github.io/post/ti-jie-uva1723-intervals/</id>
+        <link href="https://Wowing.github.io/post/ti-jie-uva1723-intervals/">
+        </link>
+        <updated>2020-11-21T12:07:55.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="题意">题意</h3>
+<p>有n个如下形式的条件:</p>
+<p>ai bi ci,表示在区间[ai, bi]内至少要选择ci个整数点。</p>
+<p>问你满足n个条件的情况下,最少需要选多少个点?</p>
+<h3 id="题解">题解</h3>
+<p>就差分约束呗......</p>
+<p>何为差分约束:如果一个系统由n个变量和m个约束条件组成，形成m个形如ai-aj≤k的不等式(i,j∈[1,n],k为常数),则称其为差分约束系统。</p>
+<p>由此，可以把它转化为图，跑一波SPFA就完事了。</p>
+<h3 id="代码">代码</h3>
+<pre><code class="language-cpp">#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+#include&lt;algorithm&gt;
+#include&lt;stack&gt;
+#include&lt;iostream&gt;
+using namespace std;
+struct node
+{
+    int u,v,w;
+    int next;
+}wee[500001];
+int minnnn=0x7f,maxxxx=-1;//最小和最大
+int n,h[500001],cnt;
+int u,v,w;
+int vis[500001],stackto[500001],qwq[500001];
+void add(int u,int v,int w)
+{
+    wee[++cnt].u=u;
+    wee[cnt].v=v;
+    wee[cnt].w=w;
+    wee[cnt].next=h[u];
+    h[u]=cnt;
+}
+bool spfa()
+{
+    stack&lt;int&gt;st;
+    while(!st.empty()) st.pop();
+    memset(stackto,0,sizeof(stackto));
+    memset(qwq,0,sizeof(qwq));
+    for(int i=minnnn;i&lt;=maxxxx;i++)
+        vis[i]=-0x7f;
+    st.push(minnnn);
+    vis[minnnn]=0;
+    stackto[minnnn]=1;
+    qwq[minnnn]++;
+    while(!st.empty())
+    {
+        int u=st.top();
+        st.pop();
+        stackto[u]=0;
+        for(int i=h[u];i!=0;i=wee[i].next)
+        {
+            if(vis[wee[i].v]&lt;vis[u]+wee[i].w)
+            {
+                vis[wee[i].v]=vis[u]+wee[i].w;
+                if(!stackto[wee[i].v])
+                {
+                    stackto[wee[i].v]=1;
+                    st.push(wee[i].v);
+                    qwq[wee[i].v]++;
+                    if(qwq[wee[i].v]&gt;n)
+                        return false;
+                }
+            }
+        }
+    }
+    return true;
+}
+
+int main()
+{
+    cin&gt;&gt;n;
+    for(int i=0;i&lt;n;i++)
+    {
+        cin&gt;&gt;u&gt;&gt;v&gt;&gt;w;
+        add(u,v+1,w);
+        minnnn=min(minnnn,u);
+        maxxxx=max(maxxxx,v+1);
+    }
+    for(int i=minnnn;i&lt;maxxxx;i++)
+    {
+        add(i,i+1,0);
+        add(i+1,i,-1);
+    }
+    spfa();//万能的spfa
+    cout&lt;&lt;vis[maxxxx]-vis[minnnn]&lt;&lt;endl;
+    return 0;
+}
+</code></pre>
 ]]></content>
     </entry>
     <entry>
@@ -26,11 +263,11 @@
         <link href="https://Wowing.github.io/post/ti-jie-at3875-arc089a-traveling/">
         </link>
         <updated>2020-04-05T11:22:16.000Z</updated>
-        <content type="html"><![CDATA[<p>有生之年居然能够入门题WA，果然我太菜了qwq</p>
+        <content type="html"><![CDATA[<p>有生之年居然能够入门题WA，果然我太菜了</p>
 <p>好，进入正题：</p>
 <p>一开始我看到这样的题目，第一反应就是万能的dfs！</p>
 <p>思路：搜索路线，由于求最短时间所以可以直接剪枝向左和向上。而求出最短时间比较即可。</p>
-<p>代码分数：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="red"><mn>0</mn></mstyle></mrow><annotation encoding="application/x-tex">\color{red}{0}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord" style="color:red;"><span class="mord" style="color:red;">0</span></span></span></span></span></p>
+<p>代码分数：0</p>
 <p>代码：</p>
 <pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
 using namespace std;
@@ -68,10 +305,10 @@ int main()
 	return 0;
 }
 </code></pre>
-<p>反思原因：求的是时间<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span>时能否<strong>到达</strong>，而不是在时间<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span>之前能否到达。</p>
-<p>所以让我们再回过头来看看这道题，可以明显地发现其实所需时间就是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span>+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span></span>嘛！等等，还没完：时间大小判断了，那怎么知道<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span>的时候到底能不能到达目的地呢？</p>
-<p>经过模拟，可以清楚地发现：如果你要在<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span>时间到达的话，最短时间到目的地后，可以<strong>不停地往回走一格再走回来，往回走一格再走回来......</strong></p>
-<p>所以，可以发现，只要剩余的时间mod<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span>余数为0的时候，结果就一定能够到达！</p>
+<p>反思原因：求的是时间t时能否<strong>到达</strong>，而不是在时间t之前能否到达。</p>
+<p>所以让我们再回过头来看看这道题，可以明显地发现其实所需时间就是x+y嘛！等等，还没完：时间大小判断了，那怎么知道t的时候到底能不能到达目的地呢？</p>
+<p>经过模拟，可以清楚地发现：如果你要在t时间到达的话，最短时间到目的地后，可以<strong>不停地往回走一格再走回来，往回走一格再走回来......</strong></p>
+<p>所以，可以发现，只要剩余的时间mod2余数为0的时候，结果就一定能够到达！</p>
 <p>代码：</p>
 <pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
 using namespace std;
@@ -163,8 +400,8 @@ int main()
         </link>
         <updated>2020-03-05T02:09:39.000Z</updated>
         <content type="html"><![CDATA[<p>看到dalao们都用DP写这道题，萌新不得不弱弱地发声：“这难道不是一道DFS题吗？”</p>
-<p>实际上，我认为这道题目就是赤裸裸的深度优先搜索！唯一要注意的是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span>为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span>的时候的特判。</p>
-<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>c</mi><mi>o</mi><mi>d</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">code</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">o</span><span class="mord mathdefault">d</span><span class="mord mathdefault">e</span></span></span></span>:</p>
+<p>实际上，我认为这道题目就是赤裸裸的深度优先搜索！唯一要注意的是n为0的时候的特判。</p>
+<p>code:</p>
 <pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
 using namespace std;
 int n,m,a[41][101];
@@ -293,21 +530,6 @@ int main()
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[哦，我们可爱的C++]]></title>
-        <id>https://Wowing.github.io/post/e-wo-men-ke-ai-de/</id>
-        <link href="https://Wowing.github.io/post/e-wo-men-ke-ai-de/">
-        </link>
-        <updated>2020-03-05T01:59:41.000Z</updated>
-        <content type="html"><![CDATA[<p>苗条的双腿和协调的五官，被许多人称做「IT界首屈一指的美女」的她，也因为拥有插花、茶道、钢琴、小提琴、柔道、剑道、合气道等等才能而出名。</p>
-<p>她的粉丝大多很狂热，还存在着「暗之军团」这样的粉丝俱乐部。「暗之军团」是规模仅次于共济会（Freemason）的巨型团体，一般人无法入会。据说如果能回答出对她非常狂热的问题，就会有查觉到的军团成员来询问「你愿意加入暗之军团吗？」</p>
-<p>与她同父异母的姊妹Objective-C一心专注于弹钢琴，他的专注被IT界的天才斯蒂芬‧贾伯斯（也被一部分人称为紫色蔷薇）相中，而一跃成为明星。（Objective-C是Apple OS X与iOS的主要开发程序语言。维基百科）</p>
-<p>而C++则是由于其美貌和才能被人关注，长年稳坐业界明星的宝座。姊妹二人真可谓是对比鲜明。</p>
-<figure data-type="image" tabindex="1"><img src="https://Wowing.github.io/post-images/1583373639532.png" alt="" loading="lazy"></figure>
-<p>她根据心情不同，频繁地变换发型和服装这一点也很出名：昨天还是和服配黑发、今天却以红发歌德系登场之类的。因为她的变身而使轻度粉丝惊奇地说「啊？这是今天的C++小姐吗？」的事情也常常发生。远离业界时私下经常穿HYSTERIC GLAMOUR的服装。</p>
-<p>关于她的出身年月日，其事务所并不公开。虽然也有出身于1983年一说，但是本文采用的是在一部份粉丝中流传甚广的1985年10月14日的说法。访间也流传有「她自己或许也不记得自己的生日…」这样诧有其事的传言。与其说「C++小姐的话，记不得自己的生日也不是什么不可思议的事情」，倒不如把这看作是她天真烂漫的表现。</p>
-]]></content>
-    </entry>
-    <entry>
         <title type="html"><![CDATA[大事祭]]></title>
         <id>https://Wowing.github.io/post/da-shi-ji/</id>
         <link href="https://Wowing.github.io/post/da-shi-ji/">
@@ -364,103 +586,6 @@ int main()
 <h4 id="理所当然的绿名祭">理所当然的绿名祭</h4>
 <p>2020-04-05 18:57:29</p>
 <p>AC200祭+提交600祭，wtcl</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[主页DA☆ZE]]></title>
-        <id>https://Wowing.github.io/post/ge-ren-jian-jie/</id>
-        <link href="https://Wowing.github.io/post/ge-ren-jian-jie/">
-        </link>
-        <updated>2020-03-04T09:54:26.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="欢迎来到蒟蒻の主页">欢迎来到蒟蒻の主页！</h1>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="Red"><menclose mathbackground="Pink"><mtext mathvariant="fraktur">个人简介</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak{\color{Red}\colorbox{Pink}{个人简介}}
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.29141em;vertical-align:-0.3em;"></span><span class="mord"><span class="mord" style="color:Red;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.29141em;"></span><span class="stretchy colorbox" style="color:Red;height:1.29141em;background-color:Pink;"></span></span><span style="top:-3.29141em;"><span class="pstrut" style="height:3.29141em;"></span><span class="mord boxpad" style="color:Red;"><span class="mord mathfrak cjk_fallback" style="color:Red;">个</span><span class="mord mathfrak cjk_fallback" style="color:Red;">人</span><span class="mord mathfrak cjk_fallback" style="color:Red;">简</span><span class="mord mathfrak cjk_fallback" style="color:Red;">介</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3em;"><span></span></span></span></span></span></span></span></span></span></span></p>
-<p>是不可爱的07xxs，喜欢唱（Crash Fever）跳（一本道）rap（睡觉）篮球（宅），music！（bushi）</p>
-<p>备用名:Memories_Killer、Back_Go2007、咕咕酱、<s>琪露诺王子</s></p>
-<p>AC率33.9%的蒟蒻</p>
-<p><a href="https://www.luogu.com.cn/team/25007">宣传一下团队qwq</a></p>
-<p><a href="https://www.bilibili.com/video/av25674">一定要看哦qwq最喜欢了qwq</a></p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="Red"><menclose mathbackground="Pink"><mtext mathvariant="fraktur">大事祭哟</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak{\color{Red}\colorbox{Pink}{大事祭哟}}
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.29141em;vertical-align:-0.3em;"></span><span class="mord"><span class="mord" style="color:Red;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.29141em;"></span><span class="stretchy colorbox" style="color:Red;height:1.29141em;background-color:Pink;"></span></span><span style="top:-3.29141em;"><span class="pstrut" style="height:3.29141em;"></span><span class="mord boxpad" style="color:Red;"><span class="mord mathfrak cjk_fallback" style="color:Red;">大</span><span class="mord mathfrak cjk_fallback" style="color:Red;">事</span><span class="mord mathfrak cjk_fallback" style="color:Red;">祭</span><span class="mord mathfrak cjk_fallback" style="color:Red;">哟</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3em;"><span></span></span></span></span></span></span></span></span></span></span></p>
-<h2 id="点击这里查看~"><a href="https://93263.blog.luogu.org/tai-shi-ji">点击这里查看~</a></h2>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="Red"><menclose mathbackground="Pink"><mtext mathvariant="fraktur">flag哟</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak{\color{Red}\colorbox{Pink}{flag哟}}
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.48047em;vertical-align:-0.48906em;"></span><span class="mord"><span class="mord" style="color:Red;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.48047em;"></span><span class="stretchy colorbox" style="color:Red;height:1.48047em;background-color:Pink;"></span></span><span style="top:-3.48047em;"><span class="pstrut" style="height:3.48047em;"></span><span class="mord boxpad" style="color:Red;"><span class="mord mathfrak" style="color:Red;">f</span><span class="mord mathfrak" style="color:Red;">l</span><span class="mord mathfrak" style="color:Red;">a</span><span class="mord mathfrak" style="color:Red;">g</span><span class="mord mathfrak cjk_fallback" style="color:Red;">哟</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.48906em;"><span></span></span></span></span></span></span></span></span></span></span></p>
-<h3 id="普通flag">普通flag:</h3>
-<p>题解15篇&gt;_&lt;</p>
-<p>通过250&gt;_&lt;</p>
-<p><s>橙名&gt;_&lt;</s> 完成于2020 5 18</p>
-<h3 id="长期高级flag">长期&amp;高级flag:</h3>
-<p>题解20篇&gt;_&lt;</p>
-<p>红名&gt;_&lt;（不可能的qwq）</p>
-<p>NOIP过初赛&gt;_&lt;</p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="Red"><menclose mathbackground="Pink"><mtext mathvariant="fraktur">友链哟</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak{\color{Red}\colorbox{Pink}{友链哟}}
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.29141em;vertical-align:-0.3em;"></span><span class="mord"><span class="mord" style="color:Red;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.29141em;"></span><span class="stretchy colorbox" style="color:Red;height:1.29141em;background-color:Pink;"></span></span><span style="top:-3.29141em;"><span class="pstrut" style="height:3.29141em;"></span><span class="mord boxpad" style="color:Red;"><span class="mord mathfrak cjk_fallback" style="color:Red;">友</span><span class="mord mathfrak cjk_fallback" style="color:Red;">链</span><span class="mord mathfrak cjk_fallback" style="color:Red;">哟</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3em;"><span></span></span></span></span></span></span></span></span></span></span></p>
-<p>欢迎各位来交换友链qwq</p>
-<blockquote>
-<p><a href="https://www.luogu.com.cn/user/33165"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="#00FA9A"><mtext mathvariant="monospace">MF</mtext><mstyle mathcolor="black"><mtext mathvariant="monospace">是犇犇龙王的说qwq</mtext></mstyle></mstyle></mrow><annotation encoding="application/x-tex">\texttt{\color{#00FA9A}MF\color{black}是犇犇龙王的说qwq}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.22222em;"></span><span class="mord text"><span class="mord texttt" style="color:#00FA9A;">MF</span><span class="mord texttt cjk_fallback" style="color:black;">是犇犇龙王的说</span><span class="mord texttt" style="color:black;">qwq</span></span></span></span></span></a></p>
-<p><a href="https://www.luogu.com.cn/user/119959"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="#66CCFF"><mtext mathvariant="monospace">脱发自动机</mtext><mstyle mathcolor="black"><mtext mathvariant="monospace">是最强の巨佬</mtext></mstyle></mstyle></mrow><annotation encoding="application/x-tex">\texttt{\color{#66CCFF}脱发自动机\color{black}是最强の巨佬}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61111em;vertical-align:0em;"></span><span class="mord text"><span class="mord texttt cjk_fallback" style="color:#66CCFF;">脱发自动机</span><span class="mord texttt cjk_fallback" style="color:black;">是最强の巨佬</span></span></span></span></span></a></p>
-</blockquote>
-<blockquote>
-<p><a href="https://www.luogu.com.cn/user/119959"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="#66CCFF"><mtext mathvariant="monospace">北见</mtext><mstyle mathcolor="black"><mtext mathvariant="monospace">是可爱的女孩纸qwq</mtext></mstyle></mstyle></mrow><annotation encoding="application/x-tex">\texttt{\color{#66CCFF}北见\color{black}是可爱的女孩纸qwq}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.22222em;"></span><span class="mord text"><span class="mord texttt cjk_fallback" style="color:#66CCFF;">北见</span><span class="mord texttt cjk_fallback" style="color:black;">是可爱的女孩纸</span><span class="mord texttt" style="color:black;">qwq</span></span></span></span></span></a></p>
-</blockquote>
-<blockquote>
-<p><a href="https://www.luogu.com.cn/user/93263"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="grey"><mtext mathvariant="monospace">Miku酱</mtext><mstyle mathcolor="black"><mtext mathvariant="monospace">是超级蒟蒻，dalao什么的不可能的</mtext></mstyle></mstyle></mrow><annotation encoding="application/x-tex">\texttt{\color{grey}Miku酱\color{black}是超级蒟蒻，dalao什么的不可能的}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61111em;vertical-align:0em;"></span><span class="mord text"><span class="mord texttt" style="color:grey;">Miku</span><span class="mord texttt cjk_fallback" style="color:grey;">酱</span><span class="mord texttt cjk_fallback" style="color:black;">是超级蒟蒻，</span><span class="mord texttt" style="color:black;">dalao</span><span class="mord texttt cjk_fallback" style="color:black;">什么的不可能的</span></span></span></span></span></a></p>
-</blockquote>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="Red"><menclose mathbackground="Pink"><mtext mathvariant="fraktur">歌曲哟</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak{\color{Red}\colorbox{Pink}{歌曲哟}}
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.29141em;vertical-align:-0.3em;"></span><span class="mord"><span class="mord" style="color:Red;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.29141em;"></span><span class="stretchy colorbox" style="color:Red;height:1.29141em;background-color:Pink;"></span></span><span style="top:-3.29141em;"><span class="pstrut" style="height:3.29141em;"></span><span class="mord boxpad" style="color:Red;"><span class="mord mathfrak cjk_fallback" style="color:Red;">歌</span><span class="mord mathfrak cjk_fallback" style="color:Red;">曲</span><span class="mord mathfrak cjk_fallback" style="color:Red;">哟</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3em;"><span></span></span></span></span></span></span></span></span></span></span></p>
-<h2 id="qwq"><a href="https://music.163.com/#/song?id=751472">qwq</a></h2>
-<h3 id="qwq-2"><a href="https://music.163.com/#/song?id=1337870331">qwq</a></h3>
-<h4 id="qwq-3"><a href="https://music.163.com/#/song?id=1342950406">qwq</a></h4>
-<h5 id="qwq-4"><a href="https://music.163.com/#/song?id=22705492">qwq</a></h5>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="Red"><menclose mathbackground="Pink"><mtext mathvariant="fraktur">喜欢的游戏哟</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak{\color{Red}\colorbox{Pink}{喜欢的游戏哟}}
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.29141em;vertical-align:-0.3em;"></span><span class="mord"><span class="mord" style="color:Red;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.29141em;"></span><span class="stretchy colorbox" style="color:Red;height:1.29141em;background-color:Pink;"></span></span><span style="top:-3.29141em;"><span class="pstrut" style="height:3.29141em;"></span><span class="mord boxpad" style="color:Red;"><span class="mord mathfrak cjk_fallback" style="color:Red;">喜</span><span class="mord mathfrak cjk_fallback" style="color:Red;">欢</span><span class="mord mathfrak cjk_fallback" style="color:Red;">的</span><span class="mord mathfrak cjk_fallback" style="color:Red;">游</span><span class="mord mathfrak cjk_fallback" style="color:Red;">戏</span><span class="mord mathfrak cjk_fallback" style="color:Red;">哟</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3em;"><span></span></span></span></span></span></span></span></span></span></span></p>
-<p><a href="https://store.steampowered.com/app/282800/100_Orange_Juice/">Orange Juice必须有牌面！</a></p>
-<p><a href="https://store.steampowered.com/app/1178050/_/">这就厉害了awa</a></p>
-<p><a href="https://store.steampowered.com/app/878380/__Touhou_Big_Big_Battle/">Good！</a></p>
-<p><a href="https://store.steampowered.com/app/1211650/Cirnos_Perfect_Summer_Vacation/">琪露诺！</a></p>
-<p><a href="https://store.steampowered.com/app/1144330/_/">等我有钱了一定要......</a></p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="Red"><menclose mathbackground="Pink"><mtext mathvariant="fraktur">壁纸哟</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak{\color{Red}\colorbox{Pink}{壁纸哟}}
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.29141em;vertical-align:-0.3em;"></span><span class="mord"><span class="mord" style="color:Red;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.29141em;"></span><span class="stretchy colorbox" style="color:Red;height:1.29141em;background-color:Pink;"></span></span><span style="top:-3.29141em;"><span class="pstrut" style="height:3.29141em;"></span><span class="mord boxpad" style="color:Red;"><span class="mord mathfrak cjk_fallback" style="color:Red;">壁</span><span class="mord mathfrak cjk_fallback" style="color:Red;">纸</span><span class="mord mathfrak cjk_fallback" style="color:Red;">哟</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3em;"><span></span></span></span></span></span></span></span></span></span></span></p>
-<h3 id="啊哈来看看这个">啊哈！来看看这个↓</h3>
-<figure data-type="image" tabindex="1"><img src="https://cdn.luogu.com.cn/upload/image_hosting/leni00tr.png" alt="" loading="lazy"></figure>
-<p>我最喜欢的壁纸之一qwq</p>
-<h3 id="或者这个">或者......这个！↓</h3>
-<figure data-type="image" tabindex="2"><img src="https://s1.ax1x.com/2020/05/03/YpFwxe.jpg" alt="" loading="lazy"></figure>
-<p>可爱！</p>
-<h2 id="其实这个是最好的qwq">其实，这个是最好的qwq↓</h2>
-<figure data-type="image" tabindex="3"><img src="https://s1.ax1x.com/2020/05/03/YpFHI0.jpg" alt="YpFHI0.jpg" loading="lazy"></figure>
-<p>⑨最可爱了qwq</p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="Red"><menclose mathbackground="Pink"><mtext mathvariant="fraktur">可爱的角色们qwq</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak{\color{Red}\colorbox{Pink}{可爱的角色们qwq}}
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.48047em;vertical-align:-0.48906em;"></span><span class="mord"><span class="mord" style="color:Red;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.48047em;"></span><span class="stretchy colorbox" style="color:Red;height:1.48047em;background-color:Pink;"></span></span><span style="top:-3.48047em;"><span class="pstrut" style="height:3.48047em;"></span><span class="mord boxpad" style="color:Red;"><span class="mord mathfrak cjk_fallback" style="color:Red;">可</span><span class="mord mathfrak cjk_fallback" style="color:Red;">爱</span><span class="mord mathfrak cjk_fallback" style="color:Red;">的</span><span class="mord mathfrak cjk_fallback" style="color:Red;">角</span><span class="mord mathfrak cjk_fallback" style="color:Red;">色</span><span class="mord mathfrak cjk_fallback" style="color:Red;">们</span><span class="mord mathfrak" style="color:Red;">q</span><span class="mord mathfrak" style="color:Red;">w</span><span class="mord mathfrak" style="color:Red;">q</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.48906em;"><span></span></span></span></span></span></span></span></span></span></span></p>
-<figure data-type="image" tabindex="4"><img src="https://cdn.luogu.com.cn/upload/image_hosting/cfre7g6s.png" alt="" loading="lazy"></figure>
-<p>灵梦酱qwq</p>
-<figure data-type="image" tabindex="5"><img src="https://cdn.luogu.com.cn/upload/image_hosting/hlbwi4av.png" alt="" loading="lazy"></figure>
-<p>威严满满！</p>
-<figure data-type="image" tabindex="6"><img src="https://cdn.luogu.com.cn/upload/image_hosting/v5vz07v5.png" alt="" loading="lazy"></figure>
-<p>公主殿下呢qwq</p>
-<figure data-type="image" tabindex="7"><img src="https://cdn.luogu.com.cn/upload/image_hosting/sgys3cah.png" alt="" loading="lazy"></figure>
-<p>吃货酱qwq</p>
-<figure data-type="image" tabindex="8"><img src="https://cdn.luogu.com.cn/upload/image_hosting/b52qnsm2.png" alt="" loading="lazy"></figure>
-<p>笨蛋⑨！</p>
-<h6 id="secret"><a href="https://www.luogu.com.cn/paste/5eozuowa">secret</a></h6>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="Red"><menclose mathbackground="Pink"><mtext mathvariant="fraktur">其他哟</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak{\color{Red}\colorbox{Pink}{其他哟}}
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.29141em;vertical-align:-0.3em;"></span><span class="mord"><span class="mord" style="color:Red;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.29141em;"></span><span class="stretchy colorbox" style="color:Red;height:1.29141em;background-color:Pink;"></span></span><span style="top:-3.29141em;"><span class="pstrut" style="height:3.29141em;"></span><span class="mord boxpad" style="color:Red;"><span class="mord mathfrak cjk_fallback" style="color:Red;">其</span><span class="mord mathfrak cjk_fallback" style="color:Red;">他</span><span class="mord mathfrak cjk_fallback" style="color:Red;">哟</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3em;"><span></span></span></span></span></span></span></span></span></span></span></p>
-<p>这屑的估值：191</p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathsize="0.9em"><mstyle mathcolor="grey"><mtext>随机車万图片</mtext></mstyle></mstyle></mrow><annotation encoding="application/x-tex">\small\color{grey}\text{随机車万图片}
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.614997em;vertical-align:0em;"></span><span class="mord text sizing reset-size6 size5" style="color:grey;"><span class="mord cjk_fallback" style="color:grey;">随机車万图片</span></span></span></span></span></span></p>
-<p><a href="https://img.paulzzh.tech/touhou/random"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><menclose mathbackground="Pink"><mstyle mathcolor="red"><munder accentunder="true"><mtext>试试手气？ ←点击这里</mtext><mo stretchy="true">‾</mo></munder></mstyle></menclose></mrow><annotation encoding="application/x-tex">\colorbox{Pink}{\color{red}\underline\text{试试手气？ ←点击这里}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.48333em;vertical-align:-0.5em;"></span><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.98333em;"><span style="top:-2.98333em;"><span class="pstrut" style="height:3.48333em;"></span><span class="stretchy colorbox" style="height:1.48333em;background-color:Pink;"></span></span><span style="top:-3.48333em;"><span class="pstrut" style="height:3.48333em;"></span><span class="mord boxpad"><span class="mord underline" style="color:red;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.68333em;"><span style="top:-2.84em;"><span class="pstrut" style="height:3em;"></span><span class="underline-line" style="color:red;border-bottom-width:0.04em;"></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord text" style="color:red;"><span class="mord cjk_fallback" style="color:red;">试试手气？</span><span class="mord" style="color:red;"> ←</span><span class="mord cjk_fallback" style="color:red;">点击这里</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.20000000000000007em;"><span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.5em;"><span></span></span></span></span></span></span></span></span></a><br>
-<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="orange"><mtext>服务器资源有限，请自觉控制访问频率。</mtext></mstyle></mrow><annotation encoding="application/x-tex">\color{orange}\text{服务器资源有限，请自觉控制访问频率。}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord text" style="color:orange;"><span class="mord cjk_fallback" style="color:orange;">服务器资源有限，请自觉控制访问频率。</span></span></span></span></span></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[【OI无关】关于神帖]]></title>
-        <id>https://Wowing.github.io/post/oi-wu-guan-guan-yu-shen-tie/</id>
-        <link href="https://Wowing.github.io/post/oi-wu-guan-guan-yu-shen-tie/">
-        </link>
-        <updated>2020-03-04T09:53:25.000Z</updated>
-        <content type="html"><![CDATA[<h5 id="不是上网的人变xxs了而是网络已经普及到xxs中去了">不是上网的人变xxs了，而是网络已经普及到xxs中去了</h5>
-<p>当一个交流平台人数很少时，人们往往能够相处得融洽，或至少能维持关系和睦，但如果变得人多而杂，便会出现某些人素质低下、态度恶劣、无法求同存异甚至专门通过引战、撕逼等引发争吵来获得快感的情况，导致时不时就会出现严重的纠纷或者战争、管理人员郁闷烦躁、平台成员愤怒离开等情况。</p>
-<p>正如某dalao所说：lg真的需要一些正气</p>
 ]]></content>
     </entry>
 </feed>

@@ -59,11 +59,11 @@
                     <hr>
                 </header>
                 <div class="neko">
-                    <p>有生之年居然能够入门题WA，果然我太菜了qwq</p>
+                    <p>有生之年居然能够入门题WA，果然我太菜了</p>
 <p>好，进入正题：</p>
 <p>一开始我看到这样的题目，第一反应就是万能的dfs！</p>
 <p>思路：搜索路线，由于求最短时间所以可以直接剪枝向左和向上。而求出最短时间比较即可。</p>
-<p>代码分数：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="red"><mn>0</mn></mstyle></mrow><annotation encoding="application/x-tex">\color{red}{0}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord" style="color:red;"><span class="mord" style="color:red;">0</span></span></span></span></span></p>
+<p>代码分数：0</p>
 <p>代码：</p>
 <pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
 using namespace std;
@@ -101,10 +101,10 @@ int main()
 	return 0;
 }
 </code></pre>
-<p>反思原因：求的是时间<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span>时能否<strong>到达</strong>，而不是在时间<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span>之前能否到达。</p>
-<p>所以让我们再回过头来看看这道题，可以明显地发现其实所需时间就是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span>+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span></span>嘛！等等，还没完：时间大小判断了，那怎么知道<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span>的时候到底能不能到达目的地呢？</p>
-<p>经过模拟，可以清楚地发现：如果你要在<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span>时间到达的话，最短时间到目的地后，可以<strong>不停地往回走一格再走回来，往回走一格再走回来......</strong></p>
-<p>所以，可以发现，只要剩余的时间mod<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span>余数为0的时候，结果就一定能够到达！</p>
+<p>反思原因：求的是时间t时能否<strong>到达</strong>，而不是在时间t之前能否到达。</p>
+<p>所以让我们再回过头来看看这道题，可以明显地发现其实所需时间就是x+y嘛！等等，还没完：时间大小判断了，那怎么知道t的时候到底能不能到达目的地呢？</p>
+<p>经过模拟，可以清楚地发现：如果你要在t时间到达的话，最短时间到目的地后，可以<strong>不停地往回走一格再走回来，往回走一格再走回来......</strong></p>
+<p>所以，可以发现，只要剩余的时间mod2余数为0的时候，结果就一定能够到达！</p>
 <p>代码：</p>
 <pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
 using namespace std;
@@ -157,11 +157,11 @@ int main()
         <div class="mdui-container">
             <div class="mdui-row">
                 
-                <a href="https://Wowing.github.io/post/wo-tm-jiu-shi-yi-ge-zhi-zhang/" class="mdui-ripple mdui-color-theme mdui-col-xs-2 mdui-col-sm-6 doc-footer-nav-left">
+                <a href="https://Wowing.github.io/post/ti-jie-uva1723-intervals/" class="mdui-ripple mdui-color-theme mdui-col-xs-2 mdui-col-sm-6 doc-footer-nav-left">
                     <div class="doc-footer-nav-text">
                         <i class="mdui-icon material-icons">arrow_back</i>
                         <span class="doc-footer-nav-direction mdui-hidden-xs-down">上一篇文章</span>
-                        <div class="doc-footer-nav-chapter mdui-hidden-xs-down">琪露诺到底有多可爱</div>
+                        <div class="doc-footer-nav-chapter mdui-hidden-xs-down">题解 UVA1723 【Intervals】</div>
                     </div>
                 </a>
                 

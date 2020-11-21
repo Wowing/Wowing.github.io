@@ -54,55 +54,51 @@
         <main id="main" class="site-main" role="main">
             <article id="post-1270" class="post-1270 post type-post status-publish format-standard hentry category-90 category-129 tag-149">
                 <header class="entry-header">
-                    <h1 class="entry-title">对于我来说，如何更快地A掉题目</h1>
-                    <p class="entry-census">发布于 2020-03-05</p>
+                    <h1 class="entry-title">题解 P6140 【[USACO07NOV]Best Cow Line S】</h1>
+                    <p class="entry-census">发布于 2020-11-21</p>
                     <hr>
                 </header>
                 <div class="neko">
-                    <h1 id="对于我来说如何更快地骗分a掉题目">对于我来说，如何更快地<s>骗分</s>A掉题目</h1>
-<p>这是关于一个蒟蒻的经验，请各位多多指教！</p>
-<h2 id="1说明">1.说明</h2>
-<p>大部分题目都有说明。这里以<a href="https://wzoi.cc/s/1/2464">小X分砖块</a>为例。在提示（说明）中可以看见这样的说明：</p>
-<ul>
-<li>对于 30%的数据，N=1。</li>
-<li>对于 60%的数据，所有 Ki均相等。</li>
-<li>对于 100%的数据， 1≤N≤100000， 1≤Ki≤1000000000， 砖的总块数不超过 1000000000。</li>
-</ul>
-<p>然后，我惊讶地发现：我不会写这道题。于是，说明就有用了！</p>
-<ul>
-<li>对于 30%的数据，N=1。<br>
-在N=1的情况下，说明只有一段，那么就特判输出砖块总数量就可以了。</li>
-</ul>
-<p>代码如下：</p>
-<pre><code class="language-cpp">	if(n==1)
-    {
-    	int ttt;
-        cin&gt;&gt;ans&gt;&gt;ttt;
-        printf(&quot;%d&quot;,ans);
-        return 0;
-    }
-    
+                    <h3 id="题意">题意</h3>
+<p>多组测试数据。</p>
+<p>给你一个长度为N的字符串S,输入格式是依次输入N个字符。</p>
+<p>N &lt;= 2000。</p>
+<p>每次你可以从S的开头或者结尾取出一个字符,放到一个T字符串的尾部。</p>
+<p>输出字典序最小的T字符串,<strong>每80个字符换一行输出。</strong></p>
+<h3 id="题解">题解</h3>
+<p>不难，直接循环即可。但是输出略微毒瘤。</p>
+<p>我们可以把情况分为两种：</p>
+<p>两边字符不一样——直接把字典序小的拿出。</p>
+<p>两边字符一样——继续寻找，找到不一样的，然后把字典序小的一边先拿出。</p>
+<h3 id="代码">代码</h3>
+<pre><code class="language-cpp">#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+using namespace std;
+int n;
+int suml,sumr,sum;
+char a[30001],ans[30001];
+int main()
+{
+	cin&gt;&gt;n;
+	for(int i=0;i&lt;n;i++) cin&gt;&gt;a[i];
+	while(strlen(a)!=strlen(ans))
+	{
+		int l,r;
+		r=strlen(a)-1-sumr;
+		l=suml;
+		while(l&lt;r&amp;&amp;a[l]==a[r]) l++,r--;
+		if(a[l]&gt;a[r]) //第一种情况
+        sumr++,ans[strlen(ans)]=a[strlen(a)-sumr];
+		else suml++,ans[strlen(ans)]=a[suml-1];//否则，判断
+	}
+	for(int i=0;i&lt;strlen(ans);i++)
+	{
+		cout&lt;&lt;ans[i];
+		sum++;
+		if(sum==80) sum=0,cout&lt;&lt;endl;//输出判断
+	}
+}
 </code></pre>
-<p>然后，就这样，轻松得了30分。<br>
-<a href="https://wzoi.cc/solutions/964078">地址</a></p>
-<p>虽然没有满分，但是30分总比0分好吧......</p>
-<p>总之，数据是个好东西！</p>
-<h2 id="2你谷评论区">2.你谷评论区</h2>
-<p>在你谷评论区，总能找到一些神奇的东西。如<a href="https://www.luogu.org/problemnew/show/P1547">P1547 Out of Hay</a></p>
-<p>在一开始写这题的时候，只是直接用最小生成树的。然而，在习惯性地点开评论区后.......</p>
-<figure data-type="image" tabindex="1"><img src="https://cdn.luogu.com.cn/upload/pic/56159.png" alt="RT" loading="lazy"></figure>
-<p>然后就把P1111加上了这位dalao的判断，然后完美AC！؏؏☝ᖗ乛◡乛ᖘ☝؏؏</p>
-<p><a href="https://www.luogu.org/recordnew/show/17960629">地址</a></p>
-<p>总之，评论区会有惊喜！（当然，有直接代码也不能抄哦！）</p>
-<h2 id="3打表">3.打表</h2>
-<p>这个就不用说了吧.......</p>
-<p><a href="https://www.luogu.org/problemnew/show/CF409F">CF409F 000001</a>，自己体会。</p>
-<h2 id="小结">小结</h2>
-<p>打表加暴力，</p>
-<p>骗分过样例。</p>
-<p>暴力出奇迹，</p>
-<p>打表出省一。</p>
-<p>第一次写文章写得不好请多关照！</p>
 
                 </div>
             </article>
@@ -112,20 +108,20 @@
         <div class="mdui-container">
             <div class="mdui-row">
                 
-                <a href="https://Wowing.github.io/post/ti-jie-at3919-abc088b-card-game-for-two/" class="mdui-ripple mdui-color-theme mdui-col-xs-2 mdui-col-sm-6 doc-footer-nav-left">
+                <a href="https://Wowing.github.io/post/ti-jie-cf543a-writing-code/" class="mdui-ripple mdui-color-theme mdui-col-xs-2 mdui-col-sm-6 doc-footer-nav-left">
                     <div class="doc-footer-nav-text">
                         <i class="mdui-icon material-icons">arrow_back</i>
                         <span class="doc-footer-nav-direction mdui-hidden-xs-down">上一篇文章</span>
-                        <div class="doc-footer-nav-chapter mdui-hidden-xs-down">题解 AT3919 【[ABC088B] Card Game for Two】</div>
+                        <div class="doc-footer-nav-chapter mdui-hidden-xs-down">题解 CF543A 【Writing Code】</div>
                     </div>
                 </a>
                 
                 
-                <a href="https://Wowing.github.io/post/da-shi-ji/" class="mdui-ripple mdui-color-theme mdui-col-xs-10 mdui-col-sm-6 doc-footer-nav-right">
+                <a href="https://Wowing.github.io/post/ti-jie-sp1684-frequent-frequent-values/" class="mdui-ripple mdui-color-theme mdui-col-xs-10 mdui-col-sm-6 doc-footer-nav-right">
                     <div class="doc-footer-nav-text">
                         <i class="mdui-icon material-icons">arrow_forward</i>
                         <span class="doc-footer-nav-direction">下一篇文章</span>
-                        <div class="doc-footer-nav-chapter">大事祭</div>
+                        <div class="doc-footer-nav-chapter">题解 SP1684 【FREQUENT - Frequent values】</div>
                     </div>
                 </a>
                 
